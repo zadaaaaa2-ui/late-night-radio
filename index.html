@@ -6,30 +6,20 @@
   <title>語音陪聊・深夜電台</title>
   <meta name="description" content="語音陪聊・陪你說晚安｜什麼都可以聊，不說教，只傾聽。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
-  <meta name="theme-color" content="#f59e0b">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="語音陪聊・深夜電台">
-  <meta property="og:description" content="什麼都可以聊，不說教，只傾聽。夜深了，有人願意聽你說話。">
-  <meta property="og:image" content="">
-  <meta property="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{--brandFrom:#fb7185;--brandTo:#f43f5e}
-    body { background:
-      radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
-      radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
-      linear-gradient(135deg, #FFF7ED, #FEF3C7) }
-    .glass { backdrop-filter: blur(8px) }
-    .btn { display:inline-flex; align-items:center; justify-content:center;
-      border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
-    .btn-primary { background: linear-gradient(90deg,var(--brandFrom),var(--brandTo)); color:#fff;
-      box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
-    .btn-primary:focus-visible, .btn-outline:focus-visible { outline:3px solid rgba(244,63,94,.35); outline-offset:2px }
+    body { background: radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
+                     radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
+                     linear-gradient(135deg, #FFF7ED, #FEF3C7); }
+    .glass { backdrop-filter: blur(8px); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
+    .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
     .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
     .hint { font-size:.875rem; opacity:.7 }
   </style>
 </head>
 <body class="text-neutral-800">
+  <!-- Top bar -->
   <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <span class="inline-block w-5 h-5 rounded-full bg-amber-400 shadow"></span>
@@ -37,16 +27,17 @@
     </div>
     <div class="flex items-center gap-2 text-sm">
       <div class="flex overflow-hidden rounded-full border">
-        <button id="btn-zh" class="px-3 py-1 bg-white" aria-label="切換為簡體中文">简</button>
-        <button id="btn-zhTW" class="px-3 py-1" aria-label="切換為繁體中文">繁</button>
+        <button id="btn-zh" class="px-3 py-1 bg-white">简</button>
+        <button id="btn-zhTW" class="px-3 py-1">繁</button>
       </div>
       <div class="flex overflow-hidden rounded-full border">
-        <button id="btn-cny" class="px-3 py-1 bg-white" aria-label="切換為人民幣">CNY</button>
-        <button id="btn-twd" class="px-3 py-1" aria-label="切換為新台幣">TWD</button>
+        <button id="btn-cny" class="px-3 py-1 bg-white">CNY</button>
+        <button id="btn-twd" class="px-3 py-1">TWD</button>
       </div>
     </div>
   </div>
 
+  <!-- Hero -->
   <header class="relative mx-auto mt-4 max-w-6xl overflow-hidden rounded-3xl p-8 glass bg-white/60 shadow-inner">
     <h1 id="title" class="text-3xl sm:text-5xl font-bold leading-tight">語音陪聊・陪你說晚安</h1>
     <p id="subtitle" class="mt-3 text-lg opacity-80">夜深了，有人願意聽你說話</p>
@@ -72,15 +63,15 @@
           </div>
           <div class="mt-3 flex gap-3 sm:mt-0">
             <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
-               id="cta" class="btn btn-primary" aria-label="透過 LINE 立即預約">
-              立即預約
+               id="cta" class="btn btn-primary">
+              立即預約（LINE）
             </a>
             <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
-               id="contactBtn" class="btn btn-outline" aria-label="透過 WeChat 聯絡我">
-              聯絡我
+               id="contactBtn" class="btn btn-outline">
+              聯絡我（WeChat）
             </a>
           </div>
-          <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊或在微信搜尋 ID：<strong>ddcapr</strong></p>
+          <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
         </div>
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass">
@@ -92,6 +83,7 @@
     </div>
   </header>
 
+  <!-- Features -->
   <section class="mx-auto mt-10 max-w-6xl px-4">
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
@@ -113,24 +105,49 @@
     </div>
   </section>
 
+  <!-- Booking (Google Forms) -->
   <section id="book" class="mx-auto mt-12 max-w-6xl px-4">
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
       <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
-      <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。</p>
-      <form class="mt-4 grid gap-3 sm:grid-cols-2" onsubmit="return false">
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="你的稱呼" aria-label="你的稱呼">
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="聯絡方式（LINE/微信/Email）" aria-label="聯絡方式">
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想預約的時間（含時區）" aria-label="預約時間">
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="偏好（語音/打字）" aria-label="偏好">
-        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想聊的主題（可留空）" aria-label="想聊的主題"></textarea>
-        <button type="button" class="btn btn-primary sm:col-span-2" id="copyLine">
-          複製 LINE 連結並前往預約
+      <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
+
+      <form class="mt-4 grid gap-3 sm:grid-cols-2"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSfom3noIEqOaIDtUt7t8lGm66l1WudofwIc2vHgq0knXQZsRA/formResponse"
+            method="POST" target="_blank">
+        <!-- 你的稱呼 -->
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.914879337" placeholder="你的稱呼" required>
+        <!-- 聯絡方式（LINE / 微信） -->
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.943214373" placeholder="聯絡方式（LINE/微信）" required>
+        <!-- 想預約的時間（含時區） -->
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.1639601503" placeholder="想預約的時間（含時區）">
+        <!-- 偏好（語音 / 打字） -->
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.774225720" placeholder="偏好（語音/打字）">
+        <!-- 想聊的主題（可留空） -->
+        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.15559483" placeholder="想聊的主題（可留空）"></textarea>
+        <!-- 備註或其他聯絡方式（可留空） -->
+        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.680359650" placeholder="備註或其他聯絡方式（可留空）"></textarea>
+
+        <!-- Google Forms 必要的隱藏欄位（保持不變） -->
+        <input type="hidden" name="fvv" value="1">
+        <input type="hidden" name="draftResponse" value="[,,&quot;-1234567890123456789&quot;]">
+        <input type="hidden" name="pageHistory" value="0">
+
+        <button type="submit" class="btn btn-primary sm:col-span-2">
+          送出預約（Google 表單）
         </button>
       </form>
-      <p class="hint mt-2">按鈕會複製你的 LINE 連結到剪貼簿，並嘗試打開 LINE。</p>
+
+      <p class="hint mt-2">提交後會在新分頁顯示表單回覆頁面；資料會自動進到你的 Google 試算表。</p>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="mx-auto mt-12 max-w-6xl px-4">
     <h2 class="text-2xl font-bold">FAQ</h2>
     <div class="mt-4 grid gap-4 md:grid-cols-3">
@@ -140,7 +157,7 @@
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
         <div id="faq2q" class="font-semibold">如何預約？</div>
-        <div id="faq2a" class="mt-1 text-sm opacity-70">點擊上方按鈕，留下聯絡方式與時間。</div>
+        <div id="faq2a" class="mt-1 text-sm opacity-70">點擊上方按鈕或填表單，留下聯絡方式與時間。</div>
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
         <div id="faq3q" class="font-semibold">能否打字聊天？</div>
@@ -149,16 +166,16 @@
     </div>
   </section>
 
+  <!-- Contact (email removed) -->
   <section id="contact" class="mx-auto mt-12 max-w-6xl px-4 pb-16">
     <div class="rounded-3xl bg-white/70 p-6 text-center glass shadow">
       <h3 id="contactTitle" class="text-xl font-semibold">私域聯絡</h3>
       <p id="contactHint" class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
         <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
-           class="btn btn-outline" aria-label="LINE 連結">LINE：dLKqAgCEBG</a>
+           class="btn btn-outline">LINE：dLKqAgCEBG</a>
         <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
-           class="btn btn-outline" aria-label="WeChat 連結">WeChat：ddcapr</a>
-        <a href="mailto:example@mail.com" class="btn btn-outline" aria-label="Email">Email：example@mail.com</a>
+           class="btn btn-outline">WeChat：ddcapr</a>
       </div>
     </div>
   </section>
@@ -170,111 +187,40 @@
 <script>
   const yearEl = document.getElementById('year'); yearEl.textContent = new Date().getFullYear();
   const state = { locale: 'zhTW', currency: 'TWD' };
-  const els = {
-    title: document.getElementById('title'),
-    subtitle: document.getElementById('subtitle'),
-    tagline: document.getElementById('tagline'),
-    pricingLabel: document.getElementById('pricingLabel'),
-    priceHalf: document.getElementById('priceHalf'),
-    priceHour: document.getElementById('priceHour'),
-    halfLabel: document.getElementById('halfLabel'),
-    hourLabel: document.getElementById('hourLabel'),
-    cta: document.getElementById('cta'),
-    contactBtn: document.getElementById('contactBtn'),
-    opener: document.getElementById('opener'),
-    bookTitle: document.getElementById('bookTitle'),
-    bookHint: document.getElementById('bookHint'),
-    faq1q: document.getElementById('faq1q'),
-    faq1a: document.getElementById('faq1a'),
-    faq2q: document.getElementById('faq2q'),
-    faq2a: document.getElementById('faq2a'),
-    faq3q: document.getElementById('faq3q'),
-    faq3a: document.getElementById('faq3a'),
-    contactTitle: document.getElementById('contactTitle'),
-    contactHint: document.getElementById('contactHint'),
-  };
-  const copy = {
-    zh: {
-      title: "语音陪聊・陪你说晚安",
-      subtitle: "夜深了，有人愿意听你说话",
-      tagline: "什么都可以聊，不说教，只倾听",
-      pricingLabel: "收费方案",
-      priceHalf: "¥60", priceHour: "¥100",
-      halfLabel: "/半小时", hourLabel: "/一小时",
-      cta: "立即预约", contactBtn: "联系我",
-      opener: "示例开场：晚安，今天过得好吗？要不要随便聊聊～",
-      bookTitle: "预约时段",
-      bookHint: "建议时段：21:00–01:00；支持语音或打字。",
-      faq1q: "都可以聊什么？",
-      faq1a: "日常、情绪、压力、兴趣、助眠等。涉政涉黄/医疗诊断恕不提供。",
-      faq2q: "如何预约？",
-      faq2a: "点击上方按钮，留下联系方式与时间。",
-      faq3q: "能否打字聊天？",
-      faq3a: "可以，收费同半小时方案。",
-      contactTitle: "私域联系",
-      contactHint: "添加后备注「晚安」＋想聊的时间。",
-    },
-    zhTW: {
-      title: "語音陪聊・陪你說晚安",
-      subtitle: "夜深了，有人願意聽你說話",
-      tagline: "什麼都可以聊，不說教，只傾聽",
-      pricingLabel: "收費方案",
-      priceHalf: "NT$300", priceHour: "NT$500",
-      halfLabel: "/半小時", hourLabel: "/一小時",
-      cta: "立即預約", contactBtn: "聯絡我",
-      opener: "示例開場：晚安，今天過得好嗎？要不要隨便聊聊～",
-      bookTitle: "預約時段",
-      bookHint: "建議時段：21:00–01:00；支援語音或打字。",
-      faq1q: "都可以聊什麼？",
-      faq1a: "日常、情緒、壓力、興趣、助眠等。涉政涉黃/醫療診斷恕不提供。",
-      faq2q: "如何預約？",
-      faq2a: "點擊上方按鈕，留下聯絡方式與時間。",
-      faq3q: "能否打字聊天？",
-      faq3a: "可以，收費同半小時方案。",
-      contactTitle: "私域聯絡",
-      contactHint: "添加後備註「晚安」＋想聊的時間。",
-    }
-  };
-  function render() {
-    const c = copy[state.locale];
-    els.title.textContent = c.title;
-    els.subtitle.textContent = c.subtitle;
-    els.tagline.textContent = c.tagline;
-    els.pricingLabel.textContent = c.pricingLabel;
-    els.priceHalf.textContent = (state.currency==='CNY'? '¥60':'NT$300');
-    els.priceHour.textContent = (state.currency==='CNY'? '¥100':'NT$500');
-    els.halfLabel.textContent = state.locale==='zh'? '/半小时' : '/半小時';
-    els.hourLabel.textContent = state.locale==='zh'? '/一小时' : '/一小時';
-    els.cta.textContent = c.cta;
-    els.contactBtn.textContent = c.contactBtn;
-    els.opener.textContent = c.opener;
-    els.bookTitle.textContent = c.bookTitle;
-    els.bookHint.textContent = c.bookHint;
-    els.faq1q.textContent = c.faq1q; els.faq1a.textContent = c.faq1a;
-    els.faq2q.textContent = c.faq2q; els.faq2a.textContent = c.faq2a;
-    els.faq3q.textContent = c.faq3q; els.faq3a.textContent = c.faq3a;
-    els.contactTitle.textContent = c.contactTitle;
-    els.contactHint.textContent = c.contactHint;
-  }
-  document.getElementById('btn-zh').onclick = () => { state.locale='zh'; document.getElementById('btn-zh').classList.add('bg-white'); document.getElementById('btn-zhTW').classList.remove('bg-white'); render() };
-  document.getElementById('btn-zhTW').onclick = () => { state.locale='zhTW'; document.getElementById('btn-zhTW').classList.add('bg-white'); document.getElementById('btn-zh').classList.remove('bg-white'); render() };
-  document.getElementById('btn-cny').onclick = () => { state.currency='CNY'; document.getElementById('btn-cny').classList.add('bg-white'); document.getElementById('btn-twd').classList.remove('bg-white'); render() };
-  document.getElementById('btn-twd').onclick = () => { state.currency='TWD'; document.getElementById('btn-twd').classList.add('bg-white'); document.getElementById('btn-cny').classList.remove('bg-white'); render() };
-  render();
 
-  const LINE_URL = "https://line.me/ti/p/dLKqAgCEBG";
-  document.getElementById('copyLine').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(LINE_URL) } catch(e){}
-    window.open(LINE_URL, '_blank', 'noopener,noreferrer')
-  });
-
-  (function(){
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const wc = document.getElementById('contactBtn');
-    wc.addEventListener('click', (e) => {
-      if(!isMobile){ alert('若電腦無法開啟 WeChat，請改用手機點擊，或在微信搜尋 ID：ddcapr'); }
-    });
-  })();
+  // Locale & currency toggles (UI only; pricing text updated)
+  document.getElementById('btn-zh').onclick = () => {
+    state.locale='zh';
+    document.getElementById('title').textContent = "语音陪聊・陪你说晚安";
+    document.getElementById('subtitle').textContent = "夜深了，有人愿意听你说话";
+    document.getElementById('tagline').textContent = "什么都可以聊，不说教，只倾听";
+    document.getElementById('pricingLabel').textContent = "收费方案";
+    document.getElementById('priceHalf').textContent = (state.currency==='CNY'?'¥60':'NT$300');
+    document.getElementById('priceHour').textContent = (state.currency==='CNY'?'¥100':'NT$500');
+    document.getElementById('halfLabel').textContent = "/半小时";
+    document.getElementById('hourLabel').textContent = "/一小时";
+  };
+  document.getElementById('btn-zhTW').onclick = () => {
+    state.locale='zhTW';
+    document.getElementById('title').textContent = "語音陪聊・陪你說晚安";
+    document.getElementById('subtitle').textContent = "夜深了，有人願意聽你說話";
+    document.getElementById('tagline').textContent = "什麼都可以聊，不說教，只傾聽";
+    document.getElementById('pricingLabel').textContent = "收費方案";
+    document.getElementById('priceHalf').textContent = (state.currency==='CNY'?'¥60':'NT$300');
+    document.getElementById('priceHour').textContent = (state.currency==='CNY'?'¥100':'NT$500');
+    document.getElementById('halfLabel').textContent = "/半小時";
+    document.getElementById('hourLabel').textContent = "/一小時";
+  };
+  document.getElementById('btn-cny').onclick = () => {
+    state.currency='CNY';
+    document.getElementById('priceHalf').textContent = '¥60';
+    document.getElementById('priceHour').textContent = '¥100';
+  };
+  document.getElementById('btn-twd').onclick = () => {
+    state.currency='TWD';
+    document.getElementById('priceHalf').textContent = 'NT$300';
+    document.getElementById('priceHour').textContent = 'NT$500';
+  };
 </script>
 </body>
 </html>

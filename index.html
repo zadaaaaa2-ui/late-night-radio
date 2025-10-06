@@ -5,12 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>語音陪聊・深夜電台</title>
   <meta name="description" content="語音陪聊・陪你說晚安｜什麼都可以聊，不說教，只傾聽。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#f59e0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="語音陪聊・深夜電台">
+  <meta property="og:description" content="什麼都可以聊，不說教，只傾聽。夜深了，有人願意聽你說話。">
+  <meta property="og:image" content="">
+  <meta property="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background: radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
-                     radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
-                     linear-gradient(135deg, #FFF7ED, #FEF3C7); }
-    .glass { backdrop-filter: blur(8px); }
+    :root{--brandFrom:#fb7185;--brandTo:#f43f5e}
+    body { background:
+      radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
+      radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
+      linear-gradient(135deg, #FFF7ED, #FEF3C7) }
+    .glass { backdrop-filter: blur(8px) }
+    .btn { display:inline-flex; align-items:center; justify-content:center;
+      border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
+    .btn-primary { background: linear-gradient(90deg,var(--brandFrom),var(--brandTo)); color:#fff;
+      box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
+    .btn-primary:focus-visible, .btn-outline:focus-visible { outline:3px solid rgba(244,63,94,.35); outline-offset:2px }
+    .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
+    .hint { font-size:.875rem; opacity:.7 }
   </style>
 </head>
 <body class="text-neutral-800">
@@ -21,12 +37,12 @@
     </div>
     <div class="flex items-center gap-2 text-sm">
       <div class="flex overflow-hidden rounded-full border">
-        <button id="btn-zh" class="px-3 py-1 bg-white">简</button>
-        <button id="btn-zhTW" class="px-3 py-1">繁</button>
+        <button id="btn-zh" class="px-3 py-1 bg-white" aria-label="切換為簡體中文">简</button>
+        <button id="btn-zhTW" class="px-3 py-1" aria-label="切換為繁體中文">繁</button>
       </div>
       <div class="flex overflow-hidden rounded-full border">
-        <button id="btn-cny" class="px-3 py-1 bg-white">CNY</button>
-        <button id="btn-twd" class="px-3 py-1">TWD</button>
+        <button id="btn-cny" class="px-3 py-1 bg-white" aria-label="切換為人民幣">CNY</button>
+        <button id="btn-twd" class="px-3 py-1" aria-label="切換為新台幣">TWD</button>
       </div>
     </div>
   </div>
@@ -55,13 +71,16 @@
             </div>
           </div>
           <div class="mt-3 flex gap-3 sm:mt-0">
-            <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" id="cta" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-3 font-semibold text-white shadow-lg shadow-pink-300/40 transition hover:scale-[1.02]">
+            <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
+               id="cta" class="btn btn-primary" aria-label="透過 LINE 立即預約">
               立即預約
             </a>
-            <a href="weixin://dl/chat?ddcapr" target="_blank" id="contactBtn" class="inline-flex items-center justify-center rounded-2xl border border-orange-300 bg-white/80 px-5 py-3 font-semibold text-orange-700 transition hover:bg-white">
+            <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
+               id="contactBtn" class="btn btn-outline" aria-label="透過 WeChat 聯絡我">
               聯絡我
             </a>
           </div>
+          <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊或在微信搜尋 ID：<strong>ddcapr</strong></p>
         </div>
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass">
@@ -98,16 +117,17 @@
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
       <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
       <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。</p>
-      <form class="mt-4 grid gap-3 sm:grid-cols-2">
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="你的稱呼" />
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="聯絡方式（LINE/微信/Email）" />
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想預約的時間（含時區）" />
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="偏好（語音/打字）" />
-        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想聊的主題（可留空）"></textarea>
-        <button type="button" class="sm:col-span-2 inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 px-6 py-3 font-semibold text-white shadow-lg shadow-orange-300/40">
-          送出預約
+      <form class="mt-4 grid gap-3 sm:grid-cols-2" onsubmit="return false">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="你的稱呼" aria-label="你的稱呼">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="聯絡方式（LINE/微信/Email）" aria-label="聯絡方式">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想預約的時間（含時區）" aria-label="預約時間">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="偏好（語音/打字）" aria-label="偏好">
+        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400" placeholder="想聊的主題（可留空）" aria-label="想聊的主題"></textarea>
+        <button type="button" class="btn btn-primary sm:col-span-2" id="copyLine">
+          複製 LINE 連結並前往預約
         </button>
       </form>
+      <p class="hint mt-2">按鈕會複製你的 LINE 連結到剪貼簿，並嘗試打開 LINE。</p>
     </div>
   </section>
 
@@ -134,9 +154,11 @@
       <h3 id="contactTitle" class="text-xl font-semibold">私域聯絡</h3>
       <p id="contactHint" class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
-        <a href="#" class="inline-flex items-center gap-2 rounded-2xl border px-4 py-2 font-medium hover:border-orange-400">LINE</a>
-        <a href="#" class="inline-flex items-center gap-2 rounded-2xl border px-4 py-2 font-medium hover:border-orange-400">WeChat</a>
-        <a href="mailto:example@mail.com" class="inline-flex items-center gap-2 rounded-2xl border px-4 py-2 font-medium hover:border-orange-400">Email</a>
+        <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
+           class="btn btn-outline" aria-label="LINE 連結">LINE：dLKqAgCEBG</a>
+        <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
+           class="btn btn-outline" aria-label="WeChat 連結">WeChat：ddcapr</a>
+        <a href="mailto:example@mail.com" class="btn btn-outline" aria-label="Email">Email：example@mail.com</a>
       </div>
     </div>
   </section>
@@ -234,11 +256,25 @@
     els.contactTitle.textContent = c.contactTitle;
     els.contactHint.textContent = c.contactHint;
   }
-  document.getElementById('btn-zh').onclick = () => { state.locale='zh'; document.getElementById('btn-zh').classList.add('bg-white'); document.getElementById('btn-zhTW').classList.remove('bg-white'); render(); };
-  document.getElementById('btn-zhTW').onclick = () => { state.locale='zhTW'; document.getElementById('btn-zhTW').classList.add('bg-white'); document.getElementById('btn-zh').classList.remove('bg-white'); render(); };
-  document.getElementById('btn-cny').onclick = () => { state.currency='CNY'; document.getElementById('btn-cny').classList.add('bg-white'); document.getElementById('btn-twd').classList.remove('bg-white'); render(); };
-  document.getElementById('btn-twd').onclick = () => { state.currency='TWD'; document.getElementById('btn-twd').classList.add('bg-white'); document.getElementById('btn-cny').classList.remove('bg-white'); render(); };
+  document.getElementById('btn-zh').onclick = () => { state.locale='zh'; document.getElementById('btn-zh').classList.add('bg-white'); document.getElementById('btn-zhTW').classList.remove('bg-white'); render() };
+  document.getElementById('btn-zhTW').onclick = () => { state.locale='zhTW'; document.getElementById('btn-zhTW').classList.add('bg-white'); document.getElementById('btn-zh').classList.remove('bg-white'); render() };
+  document.getElementById('btn-cny').onclick = () => { state.currency='CNY'; document.getElementById('btn-cny').classList.add('bg-white'); document.getElementById('btn-twd').classList.remove('bg-white'); render() };
+  document.getElementById('btn-twd').onclick = () => { state.currency='TWD'; document.getElementById('btn-twd').classList.add('bg-white'); document.getElementById('btn-cny').classList.remove('bg-white'); render() };
   render();
+
+  const LINE_URL = "https://line.me/ti/p/dLKqAgCEBG";
+  document.getElementById('copyLine').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(LINE_URL) } catch(e){}
+    window.open(LINE_URL, '_blank', 'noopener,noreferrer')
+  });
+
+  (function(){
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const wc = document.getElementById('contactBtn');
+    wc.addEventListener('click', (e) => {
+      if(!isMobile){ alert('若電腦無法開啟 WeChat，請改用手機點擊，或在微信搜尋 ID：ddcapr'); }
+    });
+  })();
 </script>
 </body>
 </html>

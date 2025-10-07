@@ -88,6 +88,17 @@
     </div>
   </header>
 
+  <!-- Voice Intro (between pricing and booking) -->
+  <section class="sec text-center">
+    <h2 class="text-2xl font-bold mb-2" id="introTitle">關於 Late Night Radio</h2>
+    <p id="introText" class="max-w-2xl mx-auto text-sm opacity-80 mb-4 leading-relaxed"></p>
+    <audio controls class="mx-auto rounded-xl shadow-md">
+      <source src="assets/voice-intro.mp3" type="audio/mpeg">
+      您的瀏覽器不支援音訊播放。
+    </audio>
+    <p class="opacity-60 text-xs mt-2" id="introHint">（將你的 voice-intro.mp3 上傳到 assets/ 資料夾即可播放）</p>
+  </section>
+
   <!-- Booking -->
   <section id="book" class="sec">
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
@@ -204,6 +215,12 @@
     ]
   };
 
+  // 語音介紹文案（繁/簡）
+  const intros = {
+    zhTW: "我們是一個溫柔的語音陪聊平台，在夜深人靜的時候，給你一個能說話、被傾聽的地方。不需要偽裝，也不需要解釋，這裡只有一份專注與理解，陪你一起度過每一個夜晚。",
+    zh: "我们是一个温柔的语音陪聊平台，在夜深人静的时候，给你一个能说话、被倾听的地方。不需要伪装，也不需要解释，这里只有一份专注与理解，陪你一起度过每一个夜晚。"
+  };
+
   function renderOpeners() {
     const list = document.getElementById('openerList');
     list.innerHTML = "";
@@ -224,7 +241,6 @@
       tr.appendChild(td1); tr.appendChild(td2);
       body.appendChild(tr);
     });
-    // 表頭語系
     document.getElementById('termsTitle').textContent = state.locale==='zh' ? "服务条款" : "服務條款";
     document.getElementById('thItem').textContent = state.locale==='zh' ? "条款项目" : "條款項目";
     document.getElementById('thContent').textContent = state.locale==='zh' ? "内容" : "內容";
@@ -247,6 +263,8 @@
       document.getElementById('faq2a').textContent = "点击上方按钮或填表单，留下联系方式与时间。";
       document.getElementById('faq3q').textContent = "能否打字聊天？";
       document.getElementById('faq3a').textContent = "可以，收费同半小时方案。";
+      document.getElementById('introTitle').textContent = "关于 Late Night Radio";
+      document.getElementById('introHint').textContent = "（把你的 voice-intro.mp3 上传到 assets/ 文件夹即可播放）";
     } else {
       document.getElementById('title').textContent = "語音陪聊・陪你說晚安";
       document.getElementById('subtitle').textContent = "夜深了，有人願意聽你說話";
@@ -260,8 +278,11 @@
       document.getElementById('faq2a').textContent = "點擊上方按鈕或填表單，留下聯絡方式與時間。";
       document.getElementById('faq3q').textContent = "能否打字聊天？";
       document.getElementById('faq3a').textContent = "可以，收費同半小時方案。";
+      document.getElementById('introTitle').textContent = "關於 Late Night Radio";
+      document.getElementById('introHint').textContent = "（將你的 voice-intro.mp3 上傳到 assets/ 資料夾即可播放）";
     }
     updatePrice(); renderOpeners(); renderTerms(); updateToggleUI();
+    document.getElementById('introText').textContent = intros[state.locale];
   }
 
   // 價格＋原價（兩倍）

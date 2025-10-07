@@ -17,8 +17,10 @@
     .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
     .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
     .price-old { text-decoration: line-through; opacity:.6; font-size:.9rem }
-    .hint { font-size:.875rem; opacity:.7 }
     .sec { margin: 3rem auto; max-width: 72rem; padding: 0 1rem; }
+    table.terms { width:100%; border-collapse: separate; border-spacing:0; overflow:hidden; border-radius:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04); }
+    .terms th, .terms td { padding:12px 14px; border:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.8); }
+    .terms th { background:#FFF7ED; text-align:left; font-weight:700; }
   </style>
 </head>
 <body class="text-neutral-800">
@@ -52,7 +54,6 @@
           <div>
             <div id="pricingLabel" class="text-sm uppercase tracking-wider opacity-60">收費方案</div>
             <div class="mt-2 flex items-center gap-4 flex-wrap">
-              <!-- Half hour -->
               <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
                 <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
                 <div class="text-xl font-semibold">
@@ -61,7 +62,6 @@
                   <span id="halfLabel" class="ml-1 text-sm font-normal opacity-70">/半小時</span>
                 </div>
               </div>
-              <!-- Hour -->
               <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
                 <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
                 <div class="text-xl font-semibold">
@@ -74,7 +74,7 @@
                  id="cta" class="btn btn-primary">立即預約（LINE）</a>
               <button id="btn-wechat" class="btn btn-outline">複製 WeChat：ddcapr</button>
             </div>
-            <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
+            <p class="mt-2 text-sm opacity-70">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
     </div>
   </header>
 
-  <!-- Google Forms Booking -->
+  <!-- Booking -->
   <section id="book" class="sec">
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
       <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
@@ -108,12 +108,8 @@
                name="entry.15559483" placeholder="想聊的主題（可留空）"></textarea>
         <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
                name="entry.680359650" placeholder="備註或其他聯絡方式（可留空）"></textarea>
-        <input type="hidden" name="fvv" value="1">
-        <input type="hidden" name="draftResponse" value="[,,&quot;-1234567890123456789&quot;]">
-        <input type="hidden" name="pageHistory" value="0">
         <button type="submit" class="btn btn-primary sm:col-span-2">送出預約（Google 表單）</button>
       </form>
-      <p class="hint mt-2">提交後會在新分頁顯示表單回覆頁面；資料會自動進到你的 Google 試算表。</p>
     </div>
   </section>
 
@@ -136,9 +132,17 @@
     </div>
   </section>
 
-  <!-- Terms Image -->
+  <!-- Terms TEXT -->
   <section class="sec">
-    <img src="assets/terms.png" alt="服務條款" class="w-full rounded-2xl shadow-sm">
+    <h2 id="termsTitle" class="text-2xl font-bold mb-3">服務條款</h2>
+    <div class="rounded-3xl glass p-3 bg-white/70">
+      <table class="terms">
+        <thead>
+          <tr><th id="thItem">條款項目</th><th id="thContent">內容</th></tr>
+        </thead>
+        <tbody id="termsBody"></tbody>
+      </table>
+    </div>
   </section>
 
   <!-- Contact -->
@@ -178,6 +182,28 @@
     ]
   };
 
+  // 條款（繁/簡）
+  const terms = {
+    zhTW: [
+      ["一、服務範圍","本服務為語音及文字陪聊，僅提供情緒陪伴、日常交流、放鬆對談等非醫療性質內容。不涉及心理治療、醫療診斷、法律諮詢或任何專業判斷。"],
+      ["二、保密與隱私","雙方聊天內容屬私人互動，應予保密，始於本平台、止於本平台，不得外傳、錄音、錄影、轉發或用於任何公開用途。若有違反，視同違約，服務方有權立即終止服務，並保留追究權利。"],
+      ["三、服務終止權","如聊天內容涉及冒犯、歧視、騷擾、威脅、違法或令人感到不適之情節，陪聊方有權立即終止服務。終止服務時，為保障安全與尊重，已收取之費用概不退還。"],
+      ["四、使用者義務","使用者應尊重陪聊人員，保持禮貌、友善互動，不得要求涉及違法、情色、暴力、政治敏感或其他不當內容之對話。"],
+      ["五、費用與退款政策","服務收費依網站公告為準。使用者確認預約後即視為同意服務條款，開始服務後不接受退款或轉讓。"],
+      ["六、免責聲明","陪聊方僅提供陪伴與傾聽，不保證能解決使用者的心理或生活問題。任何因使用本服務所導致的情緒反應或後續行為，陪聊方不承擔法律責任。"],
+      ["七、條款修改","本平台有權依實際情況隨時修訂條款，修訂後於網站公告即生效。"]
+    ],
+    zh: [
+      ["一、服务范围","本服务为语音及文字陪聊，仅提供情绪陪伴、日常交流、放松对谈等非医疗性质内容。不涉及心理治疗、医疗诊断、法律咨询或任何专业判断。"],
+      ["二、保密与隐私","双方聊天内容属私人互动，应予保密，始于本平台、止于本平台，不得外传、录音、录像、转发或用于任何公开用途。若有违反，视同违约，服务方有权立即终止服务，并保留追究权利。"],
+      ["三、服务终止权","如聊天内容涉及冒犯、歧视、骚扰、威胁、违法或令人感到不适之情节，陪聊方有权立即终止服务。终止服务时，为保障安全与尊重，已收取之费用概不退还。"],
+      ["四、使用者义务","使用者应尊重陪聊人员，保持礼貌、友善互动，不得要求涉及违法、情色、暴力、政治敏感或其他不当内容之对话。"],
+      ["五、费用与退款政策","服务收费依网站公告为准。使用者确认预约后即视为同意服务条款，开始服务后不接受退款或转让。"],
+      ["六、免责声明","陪聊方仅提供陪伴与倾听，不保证能解决使用者的心理或生活问题。任何因使用本服务所导致的情绪反应或后续行为，陪聊方不承担法律责任。"],
+      ["七、条款修改","本平台有权依实际情况随时修订条款，修订后于网站公告即生效。"]
+    ]
+  };
+
   function renderOpeners() {
     const list = document.getElementById('openerList');
     list.innerHTML = "";
@@ -186,6 +212,22 @@
       li.textContent = t;
       list.appendChild(li);
     });
+  }
+
+  function renderTerms() {
+    const body = document.getElementById('termsBody');
+    body.innerHTML = "";
+    (terms[state.locale] || []).forEach(([item, content]) => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td'); td1.textContent = item;
+      const td2 = document.createElement('td'); td2.textContent = content;
+      tr.appendChild(td1); tr.appendChild(td2);
+      body.appendChild(tr);
+    });
+    // 表頭語系
+    document.getElementById('termsTitle').textContent = state.locale==='zh' ? "服务条款" : "服務條款";
+    document.getElementById('thItem').textContent = state.locale==='zh' ? "条款项目" : "條款項目";
+    document.getElementById('thContent').textContent = state.locale==='zh' ? "内容" : "內容";
   }
 
   // 綁定語系與幣別：簡體⇄CNY、繁體⇄TWD
@@ -219,7 +261,7 @@
       document.getElementById('faq3q').textContent = "能否打字聊天？";
       document.getElementById('faq3a').textContent = "可以，收費同半小時方案。";
     }
-    updatePrice(); renderOpeners(); updateToggleUI();
+    updatePrice(); renderOpeners(); renderTerms(); updateToggleUI();
   }
 
   // 價格＋原價（兩倍）

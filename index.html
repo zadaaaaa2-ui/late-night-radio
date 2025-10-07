@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>語音陪聊・陪你說晚安</title>
-  <meta name="description" content="語音陪聊・陪你說晚安｜什麼都可以聊，不說教，只傾聽。">
+  <title>語音陪聊・深夜電台</title>
+  <meta name="description" content="語音/打字陪聊｜什麼都可以聊，不說教，只傾聽。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
@@ -16,6 +17,8 @@
     .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
     .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
     .price-old { text-decoration: line-through; opacity:.6; font-size:.9rem }
+    .hint { font-size:.875rem; opacity:.7 }
+    .sec { margin: 3rem auto; max-width: 72rem; padding: 0 1rem; }
   </style>
 </head>
 <body class="text-neutral-800">
@@ -37,7 +40,7 @@
     </div>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero / Pricing -->
   <header class="relative mx-auto mt-4 max-w-6xl overflow-hidden rounded-3xl p-8 glass bg-white/60 shadow-inner">
     <h1 id="title" class="text-3xl sm:text-5xl font-bold leading-tight">語音陪聊・陪你說晚安</h1>
     <p id="subtitle" class="mt-3 text-lg opacity-80">夜深了，有人願意聽你說話</p>
@@ -71,21 +74,51 @@
                  id="cta" class="btn btn-primary">立即預約（LINE）</a>
               <button id="btn-wechat" class="btn btn-outline">複製 WeChat：ddcapr</button>
             </div>
-            <p class="mt-2 text-sm opacity-70">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
+            <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
           </div>
         </div>
       </div>
+      <!-- 多條示例開場 -->
       <div class="rounded-2xl bg-white/70 p-5 glass">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-orange-200"></div>
-          <div id="opener" class="text-sm opacity-80">示例開場：晚安，今天過得好嗎？要不要隨便聊聊～</div>
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-orange-200 shrink-0"></div>
+          <ul id="openerList" class="text-sm opacity-80 space-y-1"></ul>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- Google Forms Booking -->
+  <section id="book" class="sec">
+    <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
+      <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
+      <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
+      <form class="mt-4 grid gap-3 sm:grid-cols-2"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSfom3noIEqOaIDtUt7t8lGm66l1WudofwIc2vHgq0knXQZsRA/formResponse"
+            method="POST" target="_blank">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.914879337" placeholder="你的稱呼" required>
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.943214373" placeholder="聯絡方式（LINE/微信）" required>
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.1639601503" placeholder="想預約的時間（含時區）">
+        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.774225720" placeholder="偏好（語音/打字）">
+        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.15559483" placeholder="想聊的主題（可留空）"></textarea>
+        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
+               name="entry.680359650" placeholder="備註或其他聯絡方式（可留空）"></textarea>
+        <input type="hidden" name="fvv" value="1">
+        <input type="hidden" name="draftResponse" value="[,,&quot;-1234567890123456789&quot;]">
+        <input type="hidden" name="pageHistory" value="0">
+        <button type="submit" class="btn btn-primary sm:col-span-2">送出預約（Google 表單）</button>
+      </form>
+      <p class="hint mt-2">提交後會在新分頁顯示表單回覆頁面；資料會自動進到你的 Google 試算表。</p>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section class="mx-auto mt-12 max-w-6xl px-4">
+  <section class="sec">
     <h2 class="text-2xl font-bold">FAQ</h2>
     <div class="mt-4 grid gap-4 md:grid-cols-3">
       <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
@@ -103,13 +136,13 @@
     </div>
   </section>
 
-  <!-- Inserted Terms Image -->
-  <section class="mx-auto mt-8 max-w-6xl px-4">
+  <!-- Terms Image -->
+  <section class="sec">
     <img src="assets/terms.png" alt="服務條款" class="w-full rounded-2xl shadow-sm">
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="mx-auto mt-12 max-w-6xl px-4 pb-16">
+  <section id="contact" class="sec pb-16">
     <div class="rounded-3xl bg-white/70 p-6 text-center glass shadow">
       <h3 class="text-xl font-semibold">聯繫方式</h3>
       <p class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
@@ -129,8 +162,69 @@
   const yearEl = document.getElementById('year'); yearEl.textContent = new Date().getFullYear();
   const state = { locale: 'zhTW', currency: 'TWD' };
 
+  // 開場句庫
+  const openers = {
+    zh: [
+      "晚安，今天过得还顺利吗？要不要随便聊聊～",
+      "最近睡得好吗？如果想放松一下，我在。",
+      "有什么小事想分享吗？我洗耳恭听。",
+      "如果心里有点闷，想说什么就说吧，我只会倾听。"
+    ],
+    zhTW: [
+      "晚安，今天過得好嗎？要不要隨便聊聊～",
+      "最近睡得還好嗎？如果想放鬆一下，我在。",
+      "有什麼小事想分享嗎？我洗耳恭聽。",
+      "如果心裡有點悶，想說什麼就說吧，我只會傾聽。"
+    ]
+  };
+
+  function renderOpeners() {
+    const list = document.getElementById('openerList');
+    list.innerHTML = "";
+    (openers[state.locale] || []).forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      list.appendChild(li);
+    });
+  }
+
+  // 綁定語系與幣別：簡體⇄CNY、繁體⇄TWD
+  function setLocaleCurrency(locale) {
+    state.locale = locale;
+    state.currency = (locale === 'zh') ? 'CNY' : 'TWD';
+    if (locale === 'zh') {
+      document.getElementById('title').textContent = "语音陪聊・陪你说晚安";
+      document.getElementById('subtitle').textContent = "夜深了，有人愿意听你说话";
+      document.getElementById('tagline').textContent = "什么都可以聊，不说教，只倾听";
+      document.getElementById('pricingLabel').textContent = "收费方案";
+      document.getElementById('bookTitle').textContent = "预约时段";
+      document.getElementById('bookHint').textContent = "建议时段：21:00–01:00；支持语音或打字。表单送出后资料将储存在 Google 表单/试算表。";
+      document.getElementById('faq1q').textContent = "都可以聊什么？";
+      document.getElementById('faq1a').textContent = "日常、情绪、压力、兴趣、助眠等。涉政涉黄/医疗诊断恕不提供。";
+      document.getElementById('faq2q').textContent = "如何预约？";
+      document.getElementById('faq2a').textContent = "点击上方按钮或填表单，留下联系方式与时间。";
+      document.getElementById('faq3q').textContent = "能否打字聊天？";
+      document.getElementById('faq3a').textContent = "可以，收费同半小时方案。";
+    } else {
+      document.getElementById('title').textContent = "語音陪聊・陪你說晚安";
+      document.getElementById('subtitle').textContent = "夜深了，有人願意聽你說話";
+      document.getElementById('tagline').textContent = "什麼都可以聊，不說教，只傾聽";
+      document.getElementById('pricingLabel').textContent = "收費方案";
+      document.getElementById('bookTitle').textContent = "預約時段";
+      document.getElementById('bookHint').textContent = "建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。";
+      document.getElementById('faq1q').textContent = "都可以聊什麼？";
+      document.getElementById('faq1a').textContent = "日常、情緒、壓力、興趣、助眠等。涉政涉黃/醫療診斷恕不提供。";
+      document.getElementById('faq2q').textContent = "如何預約？";
+      document.getElementById('faq2a').textContent = "點擊上方按鈕或填表單，留下聯絡方式與時間。";
+      document.getElementById('faq3q').textContent = "能否打字聊天？";
+      document.getElementById('faq3a').textContent = "可以，收費同半小時方案。";
+    }
+    updatePrice(); renderOpeners(); updateToggleUI();
+  }
+
+  // 價格＋原價（兩倍）
   function updatePrice() {
-    const isCNY = state.currency==='CNY';
+    const isCNY = state.currency === 'CNY';
     const halfNew = isCNY ? '¥60' : 'NT$300';
     const hourNew = isCNY ? '¥100' : 'NT$500';
     const halfOld = isCNY ? '¥120' : 'NT$600';
@@ -143,18 +237,31 @@
     document.getElementById('hourLabel').textContent = state.locale==='zh' ? '/一小时' : '/一小時';
   }
 
-  document.getElementById('btn-zh').onclick = () => { state.locale='zh'; document.getElementById('title').textContent='语音陪聊・陪你说晚安'; document.getElementById('subtitle').textContent='夜深了，有人愿意听你说话'; document.getElementById('tagline').textContent='什么都可以聊，不说教，只倾听'; document.getElementById('pricingLabel').textContent='收费方案'; updatePrice(); };
-  document.getElementById('btn-zhTW').onclick = () => { state.locale='zhTW'; document.getElementById('title').textContent='語音陪聊・陪你說晚安'; document.getElementById('subtitle').textContent='夜深了，有人願意聽你說話'; document.getElementById('tagline').textContent='什麼都可以聊，不說教，只傾聽'; document.getElementById('pricingLabel').textContent='收費方案'; updatePrice(); };
-  document.getElementById('btn-cny').onclick = () => { state.currency='CNY'; updatePrice(); };
-  document.getElementById('btn-twd').onclick = () => { state.currency='TWD'; updatePrice(); };
-  updatePrice();
+  function updateToggleUI() {
+    const zhBtn = document.getElementById('btn-zh');
+    const zhTWBtn = document.getElementById('btn-zhTW');
+    const cnyBtn = document.getElementById('btn-cny');
+    const twdBtn = document.getElementById('btn-twd');
+    [zhBtn, zhTWBtn, cnyBtn, twdBtn].forEach(b => b.classList.remove('bg-white'));
+    if (state.locale === 'zh') { zhBtn.classList.add('bg-white'); cnyBtn.classList.add('bg-white'); }
+    else { zhTWBtn.classList.add('bg-white'); twdBtn.classList.add('bg-white'); }
+  }
 
-  // WeChat copy buttons
+  // 綁定按鈕：點語系或幣別都會同步
+  document.getElementById('btn-zh').onclick = () => setLocaleCurrency('zh');
+  document.getElementById('btn-zhTW').onclick = () => setLocaleCurrency('zhTW');
+  document.getElementById('btn-cny').onclick = () => setLocaleCurrency('zh');
+  document.getElementById('btn-twd').onclick = () => setLocaleCurrency('zhTW');
+
+  // WeChat 複製
   function copyWeChat() {
     navigator.clipboard.writeText('ddcapr').then(() => { alert('已複製 WeChat ID：ddcapr'); });
   }
   document.getElementById('copyWeChat').addEventListener('click', copyWeChat);
   document.getElementById('btn-wechat').addEventListener('click', copyWeChat);
+
+  // Init
+  setLocaleCurrency('zhTW');
 </script>
 </body>
 </html>

@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>語音陪聊・深夜電台</title>
+  <title>語音陪聊・陪你說晚安</title>
   <meta name="description" content="語音陪聊・陪你說晚安｜什麼都可以聊，不說教，只傾聽。">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
                      radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
                      linear-gradient(135deg, #FFF7ED, #FEF3C7); }
     .glass { backdrop-filter: blur(8px); }
+    .tag { font-size:.75rem; padding:.15rem .5rem; border-radius:.5rem; background:#FEF3C7; color:#92400E; border:1px solid #FCD34D}
     .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
     .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
     .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
-    .hint { font-size:.875rem; opacity:.7 }
+    .price-old { text-decoration: line-through; opacity:.6; font-size:.9rem }
   </style>
 </head>
 <body class="text-neutral-800">
@@ -45,33 +45,34 @@
 
     <div class="mt-6 grid gap-4 sm:grid-cols-3">
       <div class="col-span-2 rounded-2xl bg-white/80 p-5 glass">
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
           <div>
             <div id="pricingLabel" class="text-sm uppercase tracking-wider opacity-60">收費方案</div>
-            <div class="mt-2 flex items-baseline gap-4">
-              <div class="rounded-xl bg-amber-50 px-3 py-2 shadow-sm">
+            <div class="mt-2 flex items-center gap-4 flex-wrap">
+              <!-- Half hour -->
+              <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
+                <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
                 <div class="text-xl font-semibold">
-                  <span id="priceHalf">NT$300</span><span id="halfLabel" class="ml-1 text-sm font-normal opacity-70">/半小時</span>
+                  <span id="priceHalf">NT$300</span>
+                  <span id="oldHalf" class="price-old ml-2">NT$600</span>
+                  <span id="halfLabel" class="ml-1 text-sm font-normal opacity-70">/半小時</span>
                 </div>
               </div>
-              <div class="rounded-xl bg-amber-50 px-3 py-2 shadow-sm">
+              <!-- Hour -->
+              <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
+                <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
                 <div class="text-xl font-semibold">
-                  <span id="priceHour">NT$500</span><span id="hourLabel" class="ml-1 text-sm font-normal opacity-70">/一小時</span>
+                  <span id="priceHour">NT$500</span>
+                  <span id="oldHour" class="price-old ml-2">NT$1000</span>
+                  <span id="hourLabel" class="ml-1 text-sm font-normal opacity-70">/一小時</span>
                 </div>
               </div>
+              <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
+                 id="cta" class="btn btn-primary">立即預約（LINE）</a>
+              <button id="btn-wechat" class="btn btn-outline">複製 WeChat：ddcapr</button>
             </div>
+            <p class="mt-2 text-sm opacity-70">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
           </div>
-          <div class="mt-3 flex gap-3 sm:mt-0">
-            <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
-               id="cta" class="btn btn-primary">
-              立即預約（LINE）
-            </a>
-            <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
-               id="contactBtn" class="btn btn-outline">
-              聯絡我（WeChat）
-            </a>
-          </div>
-          <p class="hint mt-2">若 WeChat 連結在電腦上無法開啟，請改用手機點擊，或在微信搜尋 ID：<strong>ddcapr</strong></p>
         </div>
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass">
@@ -82,70 +83,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Features -->
-  <section class="mx-auto mt-10 max-w-6xl px-4">
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
-        <h3 id="f1t" class="font-semibold">深夜陪伴</h3>
-        <p id="f1d" class="text-sm opacity-70">夜裡不孤單，有我在。</p>
-      </div>
-      <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
-        <h3 id="f2t" class="font-semibold">不說教</h3>
-        <p id="f2d" class="text-sm opacity-70">只傾聽與理解。</p>
-      </div>
-      <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
-        <h3 id="f3t" class="font-semibold">安全保密</h3>
-        <p id="f3d" class="text-sm opacity-70">聊天內容絕不外流。</p>
-      </div>
-      <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
-        <h3 id="f4t" class="font-semibold">彈性時段</h3>
-        <p id="f4d" class="text-sm opacity-70">支援半小時 / 一小時。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Booking (Google Forms) -->
-  <section id="book" class="mx-auto mt-12 max-w-6xl px-4">
-    <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
-      <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
-      <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
-
-      <form class="mt-4 grid gap-3 sm:grid-cols-2"
-            action="https://docs.google.com/forms/d/e/1FAIpQLSfom3noIEqOaIDtUt7t8lGm66l1WudofwIc2vHgq0knXQZsRA/formResponse"
-            method="POST" target="_blank">
-        <!-- 你的稱呼 -->
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.914879337" placeholder="你的稱呼" required>
-        <!-- 聯絡方式（LINE / 微信） -->
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.943214373" placeholder="聯絡方式（LINE/微信）" required>
-        <!-- 想預約的時間（含時區） -->
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.1639601503" placeholder="想預約的時間（含時區）">
-        <!-- 偏好（語音 / 打字） -->
-        <input class="rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.774225720" placeholder="偏好（語音/打字）">
-        <!-- 想聊的主題（可留空） -->
-        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.15559483" placeholder="想聊的主題（可留空）"></textarea>
-        <!-- 備註或其他聯絡方式（可留空） -->
-        <textarea class="sm:col-span-2 h-28 rounded-xl border px-4 py-3 outline-none transition focus:border-orange-400"
-               name="entry.680359650" placeholder="備註或其他聯絡方式（可留空）"></textarea>
-
-        <!-- Google Forms 必要的隱藏欄位（保持不變） -->
-        <input type="hidden" name="fvv" value="1">
-        <input type="hidden" name="draftResponse" value="[,,&quot;-1234567890123456789&quot;]">
-        <input type="hidden" name="pageHistory" value="0">
-
-        <button type="submit" class="btn btn-primary sm:col-span-2">
-          送出預約（Google 表單）
-        </button>
-      </form>
-
-      <p class="hint mt-2">提交後會在新分頁顯示表單回覆頁面；資料會自動進到你的 Google 試算表。</p>
-    </div>
-  </section>
 
   <!-- FAQ -->
   <section class="mx-auto mt-12 max-w-6xl px-4">
@@ -166,16 +103,20 @@
     </div>
   </section>
 
-  <!-- Contact (email removed) -->
+  <!-- Inserted Terms Image -->
+  <section class="mx-auto mt-8 max-w-6xl px-4">
+    <img src="assets/terms.png" alt="服務條款" class="w-full rounded-2xl shadow-sm">
+  </section>
+
+  <!-- Contact -->
   <section id="contact" class="mx-auto mt-12 max-w-6xl px-4 pb-16">
     <div class="rounded-3xl bg-white/70 p-6 text-center glass shadow">
-      <h3 id="contactTitle" class="text-xl font-semibold">私域聯絡</h3>
-      <p id="contactHint" class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
+      <h3 class="text-xl font-semibold">聯繫方式</h3>
+      <p class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
         <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
            class="btn btn-outline">LINE：dLKqAgCEBG</a>
-        <a href="weixin://dl/chat?ddcapr" target="_blank" rel="noopener noreferrer"
-           class="btn btn-outline">WeChat：ddcapr</a>
+        <button id="copyWeChat" class="btn btn-outline">WeChat：ddcapr（點我複製）</button>
       </div>
     </div>
   </section>
@@ -188,39 +129,32 @@
   const yearEl = document.getElementById('year'); yearEl.textContent = new Date().getFullYear();
   const state = { locale: 'zhTW', currency: 'TWD' };
 
-  // Locale & currency toggles (UI only; pricing text updated)
-  document.getElementById('btn-zh').onclick = () => {
-    state.locale='zh';
-    document.getElementById('title').textContent = "语音陪聊・陪你说晚安";
-    document.getElementById('subtitle').textContent = "夜深了，有人愿意听你说话";
-    document.getElementById('tagline').textContent = "什么都可以聊，不说教，只倾听";
-    document.getElementById('pricingLabel').textContent = "收费方案";
-    document.getElementById('priceHalf').textContent = (state.currency==='CNY'?'¥60':'NT$300');
-    document.getElementById('priceHour').textContent = (state.currency==='CNY'?'¥100':'NT$500');
-    document.getElementById('halfLabel').textContent = "/半小时";
-    document.getElementById('hourLabel').textContent = "/一小时";
-  };
-  document.getElementById('btn-zhTW').onclick = () => {
-    state.locale='zhTW';
-    document.getElementById('title').textContent = "語音陪聊・陪你說晚安";
-    document.getElementById('subtitle').textContent = "夜深了，有人願意聽你說話";
-    document.getElementById('tagline').textContent = "什麼都可以聊，不說教，只傾聽";
-    document.getElementById('pricingLabel').textContent = "收費方案";
-    document.getElementById('priceHalf').textContent = (state.currency==='CNY'?'¥60':'NT$300');
-    document.getElementById('priceHour').textContent = (state.currency==='CNY'?'¥100':'NT$500');
-    document.getElementById('halfLabel').textContent = "/半小時";
-    document.getElementById('hourLabel').textContent = "/一小時";
-  };
-  document.getElementById('btn-cny').onclick = () => {
-    state.currency='CNY';
-    document.getElementById('priceHalf').textContent = '¥60';
-    document.getElementById('priceHour').textContent = '¥100';
-  };
-  document.getElementById('btn-twd').onclick = () => {
-    state.currency='TWD';
-    document.getElementById('priceHalf').textContent = 'NT$300';
-    document.getElementById('priceHour').textContent = 'NT$500';
-  };
+  function updatePrice() {
+    const isCNY = state.currency==='CNY';
+    const halfNew = isCNY ? '¥60' : 'NT$300';
+    const hourNew = isCNY ? '¥100' : 'NT$500';
+    const halfOld = isCNY ? '¥120' : 'NT$600';
+    const hourOld = isCNY ? '¥200' : 'NT$1000';
+    document.getElementById('priceHalf').textContent = halfNew;
+    document.getElementById('priceHour').textContent = hourNew;
+    document.getElementById('oldHalf').textContent = halfOld;
+    document.getElementById('oldHour').textContent = hourOld;
+    document.getElementById('halfLabel').textContent = state.locale==='zh' ? '/半小时' : '/半小時';
+    document.getElementById('hourLabel').textContent = state.locale==='zh' ? '/一小时' : '/一小時';
+  }
+
+  document.getElementById('btn-zh').onclick = () => { state.locale='zh'; document.getElementById('title').textContent='语音陪聊・陪你说晚安'; document.getElementById('subtitle').textContent='夜深了，有人愿意听你说话'; document.getElementById('tagline').textContent='什么都可以聊，不说教，只倾听'; document.getElementById('pricingLabel').textContent='收费方案'; updatePrice(); };
+  document.getElementById('btn-zhTW').onclick = () => { state.locale='zhTW'; document.getElementById('title').textContent='語音陪聊・陪你說晚安'; document.getElementById('subtitle').textContent='夜深了，有人願意聽你說話'; document.getElementById('tagline').textContent='什麼都可以聊，不說教，只傾聽'; document.getElementById('pricingLabel').textContent='收費方案'; updatePrice(); };
+  document.getElementById('btn-cny').onclick = () => { state.currency='CNY'; updatePrice(); };
+  document.getElementById('btn-twd').onclick = () => { state.currency='TWD'; updatePrice(); };
+  updatePrice();
+
+  // WeChat copy buttons
+  function copyWeChat() {
+    navigator.clipboard.writeText('ddcapr').then(() => { alert('已複製 WeChat ID：ddcapr'); });
+  }
+  document.getElementById('copyWeChat').addEventListener('click', copyWeChat);
+  document.getElementById('btn-wechat').addEventListener('click', copyWeChat);
 </script>
 </body>
 </html>

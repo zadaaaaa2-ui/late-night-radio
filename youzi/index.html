@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>柚子｜娛樂主播 數位名片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1b1b1f; --muted:#6b7280; --border:#e5e7eb; --gold:#c7a26a; --bg:#f8fafc; --card:#ffffff;}
+  *{box-sizing:border-box} html,body{height:100%}
+  body{ margin:0; background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(207,185,145,.12), transparent 60%),
+      radial-gradient(900px 700px at -10% 90%, rgba(207,185,145,.12), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:16px;}
+  .canvas{ width:1080px; height:1920px; max-width:100%; aspect-ratio:1080/1920;
+    background:linear-gradient(180deg,#fff, #fff 60%, #faf9f7);
+    border-radius:28px; position:relative; overflow:hidden; border:1px solid #f2eee7;
+    box-shadow:0 18px 40px rgba(0,0,0,.08);}
+  .topbar{position:absolute; left:0; right:0; top:0; height:84px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg, #fff, rgba(255,255,255,.7)); border-bottom:1px solid #f1efe8;}
+  .brand{font-family:"Noto Serif TC", serif; font-weight:600; font-size:22px; letter-spacing:.12em; color:#c7a26a; text-transform:uppercase}
+  .card{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(92%,860px);
+    display:grid; grid-template-columns:220px 1fr; gap:28px; background:var(--card); border:1px solid var(--border); border-radius:24px; padding:28px;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);}
+  .avatar{width:220px; height:220px; border-radius:18px; overflow:hidden; background:#f2f2f2 url('assets/images/youzi.jpg') center/cover no-repeat;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
+  .name{font-size:34px; font-weight:700}
+  .role{font-size:14px; letter-spacing:.2em; color:#c7a26a; text-transform:uppercase; margin-top:2px}
+  .bio{margin-top:14px; color:#444; line-height:1.8}
+  .meta{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px}
+  .kv{border:1px solid var(--border); border-radius:14px; padding:14px}
+  .kv b{display:block; font-size:12px; color:#8b6a3a; letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px}
+  .kv div{font-size:16px}
+  .divider{height:1px; background:linear-gradient(90deg, transparent, #e9e4da, transparent); margin:20px 0}
+  .section h3{margin:0 0 10px; font-size:14px; letter-spacing:.2em; color:#8b6a3a; text-transform:uppercase}
+  .cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; text-decoration:none;
+    padding:12px 16px; border-radius:12px; border:1px solid #e7dac4; background:linear-gradient(180deg,#fff,#faf7f1); color:#72582f; font-weight:600;
+    box-shadow:0 6px 16px rgba(199,162,106,.18);}
+  .qrwrap{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  .qr{width:150px; height:150px; background:repeating-linear-gradient(45deg,#eee 0 10px,#f7f7f7 10px 20px);
+      border:8px solid #fff; outline:1px solid #e5e5e5; border-radius:16px; display:grid; place-items:center; color:#9a9a9a; font-size:12px}
+  .foot{position:absolute; left:0; right:0; bottom:24px; text-align:center; font-size:12px; color:#8c8c8c;}
+  @media (max-width:760px){ .card{grid-template-columns:1fr} .avatar{width:100%; height:360px} .meta{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="topbar"><div class="brand">LOVECAST</div></div>
+    <div class="card">
+      <div class="avatar"></div>
+      <div class="right">
+        <div class="name">柚子</div>
+        <div class="role">娛樂主播</div>
+        <div class="bio">擅長以溫柔清亮的嗓音帶來放鬆的氛圍；喜歡與觀眾互動、點歌與輕聊。</div>
+        <div class="meta">
+          <div class="kv"><b>主播 ID</b><div>576673</div></div>
+          <div class="kv"><b>平台</b><div>Miki Live</div></div>
+          <div class="kv"><b>拿手主題</b><div>會唱歌</div></div>
+          <div class="kv"><b>上線時段</b><div>17:00–23:00</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <h3>行動</h3>
+          <div class="cta">
+            <a class="btn" href="https://www.mikiliveapp.com" target="_blank" rel="noopener">前往 Miki Live 官網</a>
+            <a class="btn" href="#" target="_blank" rel="noopener">追蹤／聯繫</a>
+          </div>
+        </div>
+        <div class="qrwrap">
+          <div>
+            <div style="font-size:12px; letter-spacing:.2em; color:#8b6a3a; text-transform:uppercase; margin-bottom:6px">Scan to Follow</div>
+            <div style="color:var(--muted); font-size:14px">把此頁面截圖或掃描右側 QR，即可快速到站。</div>
+          </div>
+          <div class="qr">在此放 QR（assets/qr-miki.png）</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">© 2025 Sweetheart Chat · Chinese only · 18+</div>
+  </div>
+<script>
+(function(){
+  const q = document.querySelector('.qr');
+  const img = new Image(); img.src = 'assets/qr-miki.png';
+  img.onload = () => { q.textContent=''; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; img.style.borderRadius='10px'; q.appendChild(img); };
+})();
+</script>
+</body>
+</html>

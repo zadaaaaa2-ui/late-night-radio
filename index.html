@@ -4,23 +4,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>語音陪聊・深夜電台</title>
-  <meta name="description" content="語音/打字陪聊｜什麼都可以聊，不說教，只傾聽。">
+  <title>甜心樹洞陪聊</title>
+  <meta name="description" content="甜心樹洞陪聊｜不論何時何地，給你一個被傾聽的地方。什麼都可以聊，不說教，只傾聽。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background: radial-gradient(1200px 800px at 70% 0%, rgba(251,191,36,0.22), transparent),
-                     radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,0.14), transparent),
-                     linear-gradient(135deg, #FFF7ED, #FEF3C7); }
-    .glass { backdrop-filter: blur(8px); }
+    /* 柔光漸層背景 */
+    body {
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(251,191,36,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(244,114,182,.18), transparent 60%),
+        radial-gradient(800px 600px at 0% 100%, rgba(248,113,113,.14), transparent 60%),
+        linear-gradient(135deg, #FFF7ED, #FEF3C7);
+    }
+    .glass { backdrop-filter: blur(10px); }
     .tag { font-size:.75rem; padding:.15rem .5rem; border-radius:.5rem; background:#FEF3C7; color:#92400E; border:1px solid #FCD34D}
     .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
     .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
-    .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.85); color:#9a3412 }
+    .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.9); color:#9a3412 }
     .price-old { text-decoration: line-through; opacity:.6; font-size:.9rem }
     .sec { margin: 3rem auto; max-width: 72rem; padding: 0 1rem; }
     table.terms { width:100%; border-collapse: separate; border-spacing:0; overflow:hidden; border-radius:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04); }
-    .terms th, .terms td { padding:12px 14px; border:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.8); }
+    .terms th, .terms td { padding:12px 14px; border:1px solid rgba(0,0,0,0.08); background:rgba(255,255,255,0.85); }
     .terms th { background:#FFF7ED; text-align:left; font-weight:700; }
+    /* 美化 audio 元件外框 */
+    .audio-wrap { background: rgba(255,255,255,.85); border:1px solid #fde68a; border-radius:1.25rem; padding:.5rem 1rem; display:inline-block; box-shadow: 0 10px 30px -20px rgba(245,158,11,.6); }
   </style>
 </head>
 <body class="text-neutral-800">
@@ -28,7 +35,7 @@
   <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <span class="inline-block w-5 h-5 rounded-full bg-amber-400 shadow"></span>
-      <span class="font-semibold tracking-wide">Late Night Radio</span>
+      <span class="font-semibold tracking-wide">甜心樹洞陪聊</span>
     </div>
     <div class="flex items-center gap-2 text-sm">
       <div class="flex overflow-hidden rounded-full border">
@@ -44,8 +51,8 @@
 
   <!-- Hero / Pricing -->
   <header class="relative mx-auto mt-4 max-w-6xl overflow-hidden rounded-3xl p-8 glass bg-white/60 shadow-inner">
-    <h1 id="title" class="text-3xl sm:text-5xl font-bold leading-tight">語音陪聊・陪你說晚安</h1>
-    <p id="subtitle" class="mt-3 text-lg opacity-80">夜深了，有人願意聽你說話</p>
+    <h1 id="title" class="text-3xl sm:text-5xl font-bold leading-tight">甜心樹洞陪聊</h1>
+    <p id="subtitle" class="mt-3 text-lg opacity-80">不論什麼時候，這裡都有一雙耳朵願意聽你說話</p>
     <p id="tagline" class="mt-1 text-base opacity-70">什麼都可以聊，不說教，只傾聽</p>
 
     <div class="mt-6 grid gap-4 sm:grid-cols-3">
@@ -88,11 +95,23 @@
     </div>
   </header>
 
+  <!-- Voice Intro -->
+  <section class="sec text-center">
+    <h2 class="text-2xl font-bold mb-2" id="introTitle">關於 甜心樹洞陪聊</h2>
+    <p id="introText" class="max-w-2xl mx-auto text-sm opacity-80 mb-4 leading-relaxed"></p>
+    <div class="audio-wrap">
+      <audio controls class="mx-auto">
+        <source src="assets/voice-intro.mp3" type="audio/mpeg">
+        您的瀏覽器不支援音訊播放。
+      </audio>
+    </div>
+  </section>
+
   <!-- Booking -->
   <section id="book" class="sec">
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
       <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
-      <p id="bookHint" class="mt-1 text-sm opacity-70">建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
+      <p id="bookHint" class="mt-1 text-sm opacity-70">全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
       <form class="mt-4 grid gap-3 sm:grid-cols-2"
             action="https://docs.google.com/forms/d/e/1FAIpQLSfom3noIEqOaIDtUt7t8lGm66l1WudofwIc2vHgq0knXQZsRA/formResponse"
             method="POST" target="_blank">
@@ -149,7 +168,7 @@
   <section id="contact" class="sec pb-16">
     <div class="rounded-3xl bg-white/70 p-6 text-center glass shadow">
       <h3 class="text-xl font-semibold">聯繫方式</h3>
-      <p class="mt-1 text-sm opacity-70">添加後備註「晚安」＋想聊的時間。</p>
+      <p class="mt-1 text-sm opacity-70">添加後備註「想聊天的時段」。</p>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
         <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
            class="btn btn-outline">LINE：dLKqAgCEBG</a>
@@ -159,7 +178,7 @@
   </section>
 
   <footer class="border-t bg-white/60 py-6 text-center text-sm opacity-70">
-    © <span id="year"></span> Late Night Radio · 僅提供情緒與日常陪聊，非醫療心理諮詢。
+    © <span id="year"></span> 甜心樹洞陪聊 · 僅提供情緒與日常陪聊，非醫療心理諮詢。
   </footer>
 
 <script>
@@ -169,16 +188,16 @@
   // 開場句庫
   const openers = {
     zh: [
-      "晚安，今天过得还顺利吗？要不要随便聊聊～",
       "最近睡得好吗？如果想放松一下，我在。",
       "有什么小事想分享吗？我洗耳恭听。",
-      "如果心里有点闷，想说什么就说吧，我只会倾听。"
+      "如果心里有点闷，想说什么就说吧，我只会倾听。",
+      "无论几点，只要你需要，我都会在。"
     ],
     zhTW: [
-      "晚安，今天過得好嗎？要不要隨便聊聊～",
       "最近睡得還好嗎？如果想放鬆一下，我在。",
       "有什麼小事想分享嗎？我洗耳恭聽。",
-      "如果心裡有點悶，想說什麼就說吧，我只會傾聽。"
+      "如果心裡有點悶，想說什麼就說吧，我只會傾聽。",
+      "不論幾點，只要你需要，我都會在。"
     ]
   };
 
@@ -204,6 +223,12 @@
     ]
   };
 
+  // 語音介紹文案（全天候版本）
+  const intros = {
+    zhTW: "甜心樹洞陪聊，是一個在任何時刻都能被傾聽的地方。無需偽裝、無需解釋，你只要做自己；我們用耐心與理解，陪你走過生活裡每一段起伏。",
+    zh: "甜心树洞陪聊，是一个在任何时刻都能被倾听的地方。无需伪装、无需解释，你只要做自己；我们用耐心与理解，陪你走过生活里每一段起伏。"
+  };
+
   function renderOpeners() {
     const list = document.getElementById('openerList');
     list.innerHTML = "";
@@ -224,7 +249,6 @@
       tr.appendChild(td1); tr.appendChild(td2);
       body.appendChild(tr);
     });
-    // 表頭語系
     document.getElementById('termsTitle').textContent = state.locale==='zh' ? "服务条款" : "服務條款";
     document.getElementById('thItem').textContent = state.locale==='zh' ? "条款项目" : "條款項目";
     document.getElementById('thContent').textContent = state.locale==='zh' ? "内容" : "內容";
@@ -235,33 +259,36 @@
     state.locale = locale;
     state.currency = (locale === 'zh') ? 'CNY' : 'TWD';
     if (locale === 'zh') {
-      document.getElementById('title').textContent = "语音陪聊・陪你说晚安";
-      document.getElementById('subtitle').textContent = "夜深了，有人愿意听你说话";
+      document.getElementById('title').textContent = "甜心树洞陪聊";
+      document.getElementById('subtitle').textContent = "无论什么时候，这里都有一双耳朵愿意听你说话";
       document.getElementById('tagline').textContent = "什么都可以聊，不说教，只倾听";
       document.getElementById('pricingLabel').textContent = "收费方案";
       document.getElementById('bookTitle').textContent = "预约时段";
-      document.getElementById('bookHint').textContent = "建议时段：21:00–01:00；支持语音或打字。表单送出后资料将储存在 Google 表单/试算表。";
+      document.getElementById('bookHint').textContent = "全时段皆可预约；支持语音或打字。表单送出后资料将储存在 Google 表单/试算表。";
       document.getElementById('faq1q').textContent = "都可以聊什么？";
       document.getElementById('faq1a').textContent = "日常、情绪、压力、兴趣、助眠等。涉政涉黄/医疗诊断恕不提供。";
       document.getElementById('faq2q').textContent = "如何预约？";
       document.getElementById('faq2a').textContent = "点击上方按钮或填表单，留下联系方式与时间。";
       document.getElementById('faq3q').textContent = "能否打字聊天？";
       document.getElementById('faq3a').textContent = "可以，收费同半小时方案。";
+      document.getElementById('introTitle').textContent = "关于 甜心树洞陪聊";
     } else {
-      document.getElementById('title').textContent = "語音陪聊・陪你說晚安";
-      document.getElementById('subtitle').textContent = "夜深了，有人願意聽你說話";
+      document.getElementById('title').textContent = "甜心樹洞陪聊";
+      document.getElementById('subtitle').textContent = "不論什麼時候，這裡都有一雙耳朵願意聽你說話";
       document.getElementById('tagline').textContent = "什麼都可以聊，不說教，只傾聽";
       document.getElementById('pricingLabel').textContent = "收費方案";
       document.getElementById('bookTitle').textContent = "預約時段";
-      document.getElementById('bookHint').textContent = "建議時段：21:00–01:00；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。";
+      document.getElementById('bookHint').textContent = "全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。";
       document.getElementById('faq1q').textContent = "都可以聊什麼？";
       document.getElementById('faq1a').textContent = "日常、情緒、壓力、興趣、助眠等。涉政涉黃/醫療診斷恕不提供。";
       document.getElementById('faq2q').textContent = "如何預約？";
       document.getElementById('faq2a').textContent = "點擊上方按鈕或填表單，留下聯絡方式與時間。";
       document.getElementById('faq3q').textContent = "能否打字聊天？";
       document.getElementById('faq3a').textContent = "可以，收費同半小時方案。";
+      document.getElementById('introTitle').textContent = "關於 甜心樹洞陪聊";
     }
     updatePrice(); renderOpeners(); renderTerms(); updateToggleUI();
+    document.getElementById('introText').textContent = intros[state.locale];
   }
 
   // 價格＋原價（兩倍）

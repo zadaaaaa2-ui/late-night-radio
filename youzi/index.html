@@ -12,16 +12,20 @@
   body{margin:0;font-family:"Noto Sans TC",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#fff;color:var(--ink)}
   .wrap{max-width:880px;margin:0 auto;padding:clamp(16px,3vw,28px)}
   .hero{border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.06);background:linear-gradient(180deg,#fff,#fff),var(--pink)}
-  .slider{position:relative}
+  /* Auto-size Gallery */
+  .slider{position:relative;background:#faf7f9}
   .track{display:flex;transition:transform .5s ease;will-change:transform}
-  .slide{min-width:100%;height:clamp(220px,45vw,440px);display:grid;place-items:center;background:#faf7f9}
-  .slide img,.slide video{width:100%;height:100%;object-fit:cover}
+  /* 自動高度：介於 320px ~ 560px，跟著螢幕寬度變化 */
+  .slide{min-width:100%;height:clamp(320px, 56vw, 560px);display:grid;place-items:center;background:#fff8fb}
+  .slide img,.slide video{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#fff8fb}
   .nav{position:absolute;inset:0;pointer-events:none}
-  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid #e8e1d6;display:grid;place-items:center;font-weight:700;color:#7a5a2a;box-shadow:0 6px 16px rgba(0,0,0,.08);pointer-events:auto;user-select:none}
+  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid #e8e1d6;display:grid;place-items:center;font-weight:700;color:#7a5a2a;box-shadow:0 6px 16px rgba(0,0,0,.08);pointer-events:auto;user-select:none}
   .prev{left:10px}.next{right:10px}
-  .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:8px;pointer-events:auto}
+  /* 圓點移到外側下緣，不擋畫面 */
+  .dots{position:absolute;left:0;right:0;bottom:-18px;display:flex;justify-content:center;gap:8px;pointer-events:auto}
   .dot{width:8px;height:8px;border-radius:999px;background:#e5d5c1;border:1px solid #d9c9b5}
   .dot.active{background:#b89054}
+  /* Card */
   .card{padding:clamp(16px,3.5vw,32px);background:#fff}
   .name{font-weight:700;font-size:clamp(28px,6vw,42px);line-height:1.15}
   .role{color:var(--gold);font-weight:700;margin-top:6px;font-size:clamp(12px,3.2vw,15px);letter-spacing:.18em}
@@ -40,18 +44,12 @@
 <body>
   <main class="wrap">
     <article class="hero">
-      <div class="slider" aria-label="相簿">
+      <div class="slider" aria-label="相簿（自動高度）">
         <div class="track">
+          <!-- 放你自己的照片與影片；以下是示例 -->
           <div class="slide"><img src="assets/images/youzi.jpg" alt="柚子 相簿1"></div>
-          <div class="slide"><img src="assets/images/youzi2.jpg" alt="柚子 相簿2"></div>
-          <div class="slide"><img src="assets/images/youzi3.jpg" alt="柚子 相簿3"></div>
-          <div class="slide"><img src="assets/images/youzi4.jpg" alt="柚子 相簿4"></div>
-          <div class="slide"><img src="assets/images/youzi5.jpg" alt="柚子 相簿5"></div>
-          <div class="slide"><img src="assets/images/youzi6.jpg" alt="柚子 相簿6"></div>
-          <div class="slide"><img src="assets/images/youzi7.jpg" alt="柚子 相簿7"></div>
-          <div class="slide"><img src="assets/images/youzi8.jpg" alt="柚子 相簿8"></div>
           <div class="slide"><video src="assets/media/sample.mp4" muted loop playsinline></video></div>
-          <div class="slide"><video src="assets/media/sample2.mp4" muted loop playsinline></video></div>
+          <div class="slide"><img src="assets/images/youzi2.jpg" alt="柚子 相簿2"></div>
         </div>
         <div class="nav">
           <button class="arrow prev" aria-label="上一張">&#8249;</button>
@@ -83,6 +81,7 @@
   </main>
 
 <script>
+// 輪播（自動播放 + 觸控滑動）
 (function(){
   const slider=document.querySelector('.slider');
   const track=slider.querySelector('.track');
@@ -110,7 +109,7 @@
       if(v){ si===index ? v.play().catch(()=>{}) : v.pause(); }
     });
   }
-  function auto(){ clearInterval(timer); timer=setInterval(()=>go(index+1),4000); }
+  function auto(){ clearInterval(timer); timer=setInterval(()=>go(index+1),4200); }
   slider.addEventListener('mouseenter',()=>clearInterval(timer));
   slider.addEventListener('mouseleave',auto);
   prev.addEventListener('click',()=>{go(index-1);auto();});

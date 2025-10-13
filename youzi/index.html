@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>柚子｜娛樂主播 數位名片</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
   :root{--ink:#1b1b1f;--muted:#6b7280;--gold:#b89054;--pink:#f8e8ee;--border:#ece7de;--card:#fff;}
   *{box-sizing:border-box}
@@ -44,57 +45,103 @@
   .foot{padding:20px;text-align:center;color:#8c8c8c;font-size:12px}
   @media (max-width:720px){.grid{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
-  <main class="wrap">
-    <article class="hero">
-      <div class="slider" aria-label="相簿（原始大小）">
-        <div class="track">
-          <!-- Demo items; replace with your images/videos -->
-          <div class="slide"><img src="assets/images/youzi.jpg" alt="柚子 相簿1"></div>
-          <div class="slide"><img src="assets/images/youzi2.jpg" alt="柚子 相簿2"></div>
-          <div class="slide"><img src="assets/images/youzi3.jpg" alt="柚子 相簿3"></div>
-          <div class="slide"><img src="assets/images/youzi4.jpg" alt="柚子 相簿4"></div>
-          <div class="slide"><img src="assets/images/youzi5.jpg" alt="柚子 相簿5"></div>
-          <div class="slide"><img src="assets/images/youzi6.jpg" alt="柚子 相簿6"></div>
-          <div class="slide"><img src="assets/images/youzi7.jpg" alt="柚子 相簿7"></div>
-          <div class="slide"><img src="assets/images/youzi8.jpg" alt="柚子 相簿8"></div>
+<style>
+.profile-box {
+  position: relative;
+  width: 320px;
+  height: 400px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(255,180,200,0.25);
+  background: linear-gradient(180deg, #fff8fa, #fff0f7);
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px auto;
+}
+.profile-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.profile-box .watermark {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  color: rgba(255, 220, 230, 0.9);
+  font-size: 16px;
+  font-weight: 700;
+  text-shadow:
+    0 0 6px rgba(255, 150, 180, 0.8),
+    1px 1px 2px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  user-select: none;
+}
+</style><style>
+/* == Unified card size for portrait & carousel == */
+.slider{
+  width:320px !important;
+  height:400px !important;
+  margin:24px auto !important;
+  border-radius:24px !important;
+  overflow:hidden !important;
+  box-shadow:0 8px 30px rgba(255,180,200,.25) !important;
+  background:linear-gradient(180deg,#fff8fa,#fff0f7) !important;
+  position:relative;
+}
+.slider .track, .slider .slide{ height:100% !important; }
+.slider .slide img,
+.slider .slide video{ width:100% !important; height:100% !important; object-fit:cover !important; display:block; }
 
-          <div class="slide"><video src="assets/media/sample.mp4" muted loop playsinline></video></div>
-          <div class="slide"><video src="assets/media/sample2.mp4" muted loop playsinline></video></div>
-
-        </div>
-        <div class="nav">
-          <button class="arrow prev" aria-label="上一張">&#8249;</button>
-          <button class="arrow next" aria-label="下一張">&#8250;</button>
-          <div class="dots" role="tablist"></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h1 class="name">柚子</h1>
-        <div class="role">娛樂主播</div>
-        <p class="bio">擅長以溫柔清亮的嗓音帶來放鬆的氛圍；喜歡與觀眾互動、點歌與輕聊。</p>
-
-        <section class="grid" aria-label="基本資訊">
-          <div class="kv"><b>主播 ID</b><div>576673</div></div>
-          <div class="kv"><b>平台</b><div>Miki Live</div></div>
-          <div class="kv" style="grid-column:span 2"><b>拿手主題</b><div>唱歌、陪伴、傾聽</div></div>
-          <div class="kv" style="grid-column:span 2"><b>上線時段</b><div>17:00–23:00</div></div>
-        </section>
-
-        <h3 class="section-title">行動</h3>
-        <div class="cta">
-          <a class="btn" href="https://www.mikiliveapp.com" target="_blank" rel="noopener">前往 Miki Live 官網</a>
+/* dots & arrows inside compact card */
+.slider .dots{ bottom:10px !important; }
+.slider .arrow{ width:36px; height:36px; }
+</style></head>
+<main class="wrap">
+<article class="hero">
+<div aria-label="相簿（原始大小）" class="slider">
+<div class="track">
+<!-- Demo items; replace with your images/videos -->
+<div class="slide"><img alt="柚子 相簿1" src="assets/images/youzi.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿2" src="assets/images/youzi2.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿3" src="assets/images/youzi3.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿4" src="assets/images/youzi4.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿5" src="assets/images/youzi5.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿6" src="assets/images/youzi6.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿7" src="assets/images/youzi7.jpg"/></div>
+<div class="slide"><img alt="柚子 相簿8" src="assets/images/youzi8.jpg"/></div>
+<div class="slide"><video loop="" muted="" playsinline="" src="assets/media/sample.mp4"></video></div>
+<div class="slide"><video loop="" muted="" playsinline="" src="assets/media/sample2.mp4"></video></div>
+</div>
+<div class="nav">
+<button aria-label="上一張" class="arrow prev">‹</button>
+<button aria-label="下一張" class="arrow next">›</button>
+<div class="dots" role="tablist"></div>
+</div>
+</div>
+<div class="card">
+<h1 class="name">柚子</h1>
+<div class="role">娛樂主播</div>
+<p class="bio">擅長以溫柔清亮的嗓音帶來放鬆的氛圍；喜歡與觀眾互動、點歌與輕聊。</p>
+<section aria-label="基本資訊" class="grid">
+<div class="kv"><b>主播 ID</b><div>576673</div></div>
+<div class="kv"><b>平台</b><div>Miki Live</div></div>
+<div class="kv" style="grid-column:span 2"><b>拿手主題</b><div>唱歌、陪伴、傾聽</div></div>
+<div class="kv" style="grid-column:span 2"><b>上線時段</b><div>17:00–23:00</div></div>
+</section>
+<h3 class="section-title">行動</h3>
+<div class="cta">
+<a class="btn" href="https://www.mikiliveapp.com" rel="noopener" target="_blank">前往 Miki Live 官網</a>
 <a class="btn" href="#" onclick="navigator.clipboard.writeText('terry960413'); alert('已複製微信ID：terry960413');">
   添加"柚子的助理"
 </a>
-        </div>
-      </div>
-    </article>
-    <div class="foot">© 2025 mikilive·柚子. · Chinese only · 18+</div>
-  </main>
-
+</div>
+</div>
+</article>
+<div class="foot">© 2025 mikilive·柚子. · Chinese only · 18+</div>
+</main>
 <script>
 // 自動播放 + 觸控滑動 + 點擊媒體即全螢幕
 (function(){
@@ -151,5 +198,8 @@
   updateDots(); go(0); auto();
 })();
 </script>
-</body>
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+</script></body>
 </html>

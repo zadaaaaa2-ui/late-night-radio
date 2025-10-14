@@ -1,14 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>甜心樹洞陪聊</title>
+  <title>甜心樹洞陪聊 Sweetheart Chat</title>
   <meta name="description" content="甜心樹洞陪聊｜不論何時何地，給你一個被傾聽的地方。什麼都可以聊，不說教，只傾聽。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* 柔光漸層背景 */
     body {
       background:
         radial-gradient(1200px 700px at 15% -10%, rgba(251,191,36,.22), transparent 60%),
@@ -21,12 +19,10 @@
     .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.75rem 1.25rem; font-weight:600 }
     .btn-primary { background: linear-gradient(90deg,#fb7185,#f43f5e); color:#fff; box-shadow:0 10px 25px -12px rgba(244,63,94,.5) }
     .btn-outline { border:1px solid #fdba74; background:rgba(255,255,255,.9); color:#9a3412 }
-    .price-old { text-decoration: line-through; opacity:.6; font-size:.9rem }
     .sec { margin: 3rem auto; max-width: 72rem; padding: 0 1rem; }
     table.terms { width:100%; border-collapse: separate; border-spacing:0; overflow:hidden; border-radius:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04); }
     .terms th, .terms td { padding:12px 14px; border:1px solid rgba(0,0,0,0.08); background:rgba(255,255,255,0.85); }
     .terms th { background:#FFF7ED; text-align:left; font-weight:700; }
-    /* 美化 audio 元件外框 */
     .audio-wrap { background: rgba(255,255,255,.85); border:1px solid #fde68a; border-radius:1.25rem; padding:.5rem 1rem; display:inline-block; box-shadow: 0 10px 30px -20px rgba(245,158,11,.6); }
   </style>
 </head>
@@ -35,7 +31,7 @@
   <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
     <div class="flex items-center gap-2">
       <span class="inline-block w-5 h-5 rounded-full bg-amber-400 shadow"></span>
-      <span class="font-semibold tracking-wide">甜心樹洞陪聊</span>
+      <span class="font-semibold tracking-wide">甜心樹洞陪聊 Sweetheart Chat</span>
     </div>
     <div class="flex items-center gap-2 text-sm">
       <div class="flex overflow-hidden rounded-full border">
@@ -49,7 +45,7 @@
     </div>
   </div>
 
-  <!-- Hero / Pricing -->
+  <!-- Hero -->
   <header class="relative mx-auto mt-4 max-w-6xl overflow-hidden rounded-3xl p-8 glass bg-white/60 shadow-inner">
     <h1 id="title" class="text-3xl sm:text-5xl font-bold leading-tight">甜心樹洞陪聊</h1>
     <p id="subtitle" class="mt-3 text-lg opacity-80">不論什麼時候，這裡都有一雙耳朵願意聽你說話</p>
@@ -59,25 +55,8 @@
       <div class="col-span-2 rounded-2xl bg-white/80 p-5 glass">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
           <div>
-            <div id="pricingLabel" class="text-sm uppercase tracking-wider opacity-60">收費方案</div>
             <div class="mt-2 flex items-center gap-4 flex-wrap">
-              <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
-                <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
-                <div class="text-xl font-semibold">
-                  <span id="priceHalf">NT$300</span>
-                  <span id="oldHalf" class="price-old ml-2">NT$600</span>
-                  <span id="halfLabel" class="ml-1 text-sm font-normal opacity-70">/半小時</span>
-                </div>
-              </div>
-              <div class="rounded-xl bg-amber-50 px-4 py-3 shadow-sm">
-                <div class="text-sm mb-1"><span class="tag">限時優惠</span></div>
-                <div class="text-xl font-semibold">
-                  <span id="priceHour">NT$500</span>
-                  <span id="oldHour" class="price-old ml-2">NT$1000</span>
-                  <span id="hourLabel" class="ml-1 text-sm font-normal opacity-70">/一小時</span>
-                </div>
-              </div>
-              <a href="https://lin.ee/DjhPCUT" target="_blank" rel="noopener noreferrer"
+              <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
                  id="cta" class="btn btn-primary">立即預約（LINE）</a>
               <button id="btn-wechat" class="btn btn-outline">複製 WeChat：ddcapr</button>
             </div>
@@ -107,11 +86,38 @@
     </div>
   </section>
 
+  <!-- Unified Pricing + Service -->
+  <section class="sec">
+    <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
+      <h2 id="pricingTitle" class="text-2xl font-bold mb-2">💖 收費標準與服務說明</h2>
+      <p id="pricingLead" class="text-sm opacity-80 mb-4">
+        甜心陪聊提供語音與打字陪伴，依時段計費。<br>
+        不說教、不催促，只傾聽你的故事 🌷
+      </p>
+
+      <div id="pricingBlock" class="mb-5"></div>
+
+      <div class="bg-white/70 rounded-2xl p-4 mb-4">
+        <h3 class="font-semibold mb-2">🌷 <span id="planTitle">包月方案</span></h3>
+        <ul id="planList" class="text-sm opacity-80 leading-relaxed"></ul>
+        <p id="planNote" class="text-xs opacity-70 mt-2">📅 可自由分次使用（每次 30 分鐘起）</p>
+      </div>
+
+      <div class="bg-white/70 rounded-2xl p-4">
+        <h3 class="font-semibold mb-2">💬 <span id="serviceTitle">服務說明</span></h3>
+        <ul id="serviceList" class="text-sm opacity-80 leading-relaxed"></ul>
+      </div>
+    </div>
+  </section>
+
   <!-- Booking -->
   <section id="book" class="sec">
     <div class="rounded-3xl bg-gradient-to-br from-white/80 to-amber-50/80 p-6 glass shadow">
       <h2 id="bookTitle" class="text-2xl font-bold">預約時段</h2>
-      <p id="bookHint" class="mt-1 text-sm opacity-70">全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。</p>
+      <p id="bookHint" class="mt-1 text-sm opacity-70">
+        全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。
+        <br>🌸 近期將推出「甜心陪聊優惠活動」，預約前可留言「我要優惠」優先獲得名額 💗
+      </p>
       <form class="mt-4 grid gap-3 sm:grid-cols-2"
             action="https://docs.google.com/forms/d/e/1FAIpQLSfom3noIEqOaIDtUt7t8lGm66l1WudofwIc2vHgq0knXQZsRA/formResponse"
             method="POST" target="_blank">
@@ -146,7 +152,7 @@
       </div>
       <div class="rounded-2xl bg-white/70 p-5 glass shadow-sm">
         <div id="faq3q" class="font-semibold">能否打字聊天？</div>
-        <div id="faq3a" class="mt-1 text-sm opacity-70">可以，收費同半小時方案。</div>
+        <div id="faq3a" class="mt-1 text-sm opacity-70">可以，收費另計可諮詢。</div>
       </div>
     </div>
   </section>
@@ -170,7 +176,7 @@
       <h3 class="text-xl font-semibold">聯繫方式</h3>
       <p class="mt-1 text-sm opacity-70">添加後備註「想聊天的時段」。</p>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
-        <a href="https://lin.ee/DjhPCUT" target="_blank" rel="noopener noreferrer"
+        <a href="https://line.me/ti/p/dLKqAgCEBG" target="_blank" rel="noopener noreferrer"
            class="btn btn-outline">LINE：甜心陪聊</a>
         <button id="copyWeChat" class="btn btn-outline">WeChat：ddcapr（點我複製）</button>
       </div>
@@ -223,10 +229,52 @@
     ]
   };
 
-  // 語音介紹文案（全天候版本）
-  const intros = {
-    zhTW: "甜心樹洞陪聊，是一個在任何時刻都能被傾聽的地方。無需偽裝、無需解釋，你只要做自己；我們用耐心與理解，陪你走過生活裡每一段起伏。",
-    zh: "甜心树洞陪聊，是一个在任何时刻都能被倾听的地方。无需伪装、无需解释，你只要做自己；我们用耐心与理解，陪你走过生活里每一段起伏。"
+  // 服務說明（多語）
+  const serviceInfo = {
+    zhTW: [
+      "不說教、不催促，只傾聽",
+      "保密原則｜尊重互動",
+      "僅提供情緒與日常陪伴，非心理諮詢",
+      "推薦時段：20:00～01:00（最放鬆的陪伴時刻）"
+    ],
+    zh: [
+      "不说教、不催促，只倾听",
+      "隐私保密｜尊重互动",
+      "仅提供情绪与日常陪伴，非心理咨询",
+      "推荐时段：20:00～01:00（更放松的陪伴时段）"
+    ]
+  };
+
+  // 價目與包月（雙幣）
+  const tableData = {
+    zhTW: {
+      rows: [
+        ["早｜06:00–10:00","NT$350／小時","早晨輕聊，療癒開啟新的一天 ☀️"],
+        ["午｜10:00–18:00","NT$400／小時","日常傾聽，讓心情柔軟一點 🍃"],
+        ["晚｜18:00–22:00","NT$500／小時","放鬆時光，熱門時段 💬"],
+        ["深夜｜22:00–01:00","NT$600／小時","限量名額，夜裡的陪伴 🌙"]
+      ],
+      plan: [
+        "🌸 標準月聊（4 小時）NT$1,500 — 輕量陪伴，適合偶爾傾訴",
+        "🌷 溫柔陪伴（8 小時）NT$3,000 — 穩定情緒支持，深夜可預約",
+        "💞 心靈療癒（12 小時）NT$4,000 — 專屬時間優先保留＋一對一關懷"
+      ],
+      experience: "✨ 初次預約優惠價：NT$250 / 30分鐘"
+    },
+    zh: {
+      rows: [
+        ["早｜06:00–10:00","¥35／小时","早晨轻聊，温柔开启新一天 ☀️"],
+        ["午｜10:00–18:00","¥40／小时","日常倾听，让心情放松一点 🍃"],
+        ["晚｜18:00–22:00","¥55／小时","放松时光，热门时段 💬"],
+        ["深夜｜22:00–01:00","¥70／小时","限量名额，夜晚的陪伴 🌙"]
+      ],
+      plan: [
+        "🌸 标准月聊（4 小时）¥200 — 轻量陪伴，适合偶尔倾诉",
+        "🌷 温柔陪伴（8 小时）¥300 — 稳定情绪支持，夜晚可预约",
+        "💞 心灵疗愈（12 小时）¥450 — 专属时段优先保留＋一对一关怀"
+      ],
+      experience: "✨ 首次体验价：¥30 / 30分钟"
+    }
   };
 
   function renderOpeners() {
@@ -254,7 +302,49 @@
     document.getElementById('thContent').textContent = state.locale==='zh' ? "内容" : "內容";
   }
 
-  // 綁定語系與幣別：簡體⇄CNY、繁體⇄TWD
+  function renderPricing() {
+    const t = tableData[state.locale];
+    // table
+    let html = '<table class="terms mb-3"><thead><tr>' +
+      (state.locale==='zh' ? '<th>时段</th><th>收费</th><th>备注</th>' : '<th>時段</th><th>收費</th><th>備註</th>') +
+      '</tr></thead><tbody>';
+    t.rows.forEach(r => {
+      html += `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    // experience banner
+    html += `<div class="rounded-xl bg-white/80 border p-3 text-sm"><span class="tag">${state.locale==='zh'?'限时优惠':'限時優惠'}</span> <span class="ml-2 font-semibold">${t.experience}</span> <span class="opacity-70 ml-2">${state.locale==='zh'?'语音/打字皆可':'語音/打字皆可'}</span></div>`;
+    document.getElementById('pricingBlock').innerHTML = html;
+
+    // plans
+    const planList = document.getElementById('planList');
+    planList.innerHTML = "";
+    t.plan.forEach(line => {
+      const li = document.createElement('li'); li.textContent = line; planList.appendChild(li);
+    });
+
+    // titles/labels
+    document.getElementById('pricingTitle').textContent = state.locale==='zh' ? "💖 收费标准与服务说明" : "💖 收費標準與服務說明";
+    document.getElementById('pricingLead').innerHTML = state.locale==='zh'
+      ? "甜心陪聊提供语音与打字陪伴，按时段收费。<br>不说教、不催促，只倾听你的故事 🌷"
+      : "甜心陪聊提供語音與打字陪伴，依時段計費。<br>不說教、不催促，只傾聽你的故事 🌷";
+    document.getElementById('planTitle').textContent = state.locale==='zh' ? "包月制度" : "包月方案";
+    document.getElementById('planNote').textContent = state.locale==='zh' ? "📅 可自由分次使用（每次 30 分钟起）" : "📅 可自由分次使用（每次 30 分鐘起）";
+
+    // service list
+    const sList = document.getElementById('serviceList');
+    sList.innerHTML = "";
+    (serviceInfo[state.locale] || []).forEach(t => {
+      const li = document.createElement('li'); li.textContent = t; sList.appendChild(li);
+    });
+  }
+
+  // 語音介紹文案（全天候版本）
+  const intros = {
+    zhTW: "甜心樹洞陪聊，是一個在任何時刻都能被傾聽的地方。無需偽裝、無需解釋，你只要做自己；我們用耐心與理解，陪你走過生活裡每一段起伏。",
+    zh: "甜心树洞陪聊，是一个在任何时刻都能被倾听的地方。无需伪装、无需解释，你只要做自己；我们用耐心与理解，陪你走过生活里每一段起伏。"
+  };
+
   function setLocaleCurrency(locale) {
     state.locale = locale;
     state.currency = (locale === 'zh') ? 'CNY' : 'TWD';
@@ -262,9 +352,8 @@
       document.getElementById('title').textContent = "甜心树洞陪聊";
       document.getElementById('subtitle').textContent = "无论什么时候，这里都有一双耳朵愿意听你说话";
       document.getElementById('tagline').textContent = "什么都可以聊，不说教，只倾听";
-      document.getElementById('pricingLabel').textContent = "收费方案";
       document.getElementById('bookTitle').textContent = "预约时段";
-      document.getElementById('bookHint').textContent = "全时段皆可预约；支持语音或打字。表单送出后资料将储存在 Google 表单/试算表。";
+      document.getElementById('bookHint').innerHTML = "全时段皆可预约；支持语音或打字。表单送出后资料将储存在 Google 表单/试算表。<br>🌸 近期将推出「甜心陪聊优惠活动」，预约前可留言「我要优惠」优先获得名额 💗";
       document.getElementById('faq1q').textContent = "都可以聊什么？";
       document.getElementById('faq1a').textContent = "日常、情绪、压力、兴趣、助眠等。涉政涉黄/医疗诊断恕不提供。";
       document.getElementById('faq2q').textContent = "如何预约？";
@@ -276,34 +365,21 @@
       document.getElementById('title').textContent = "甜心樹洞陪聊";
       document.getElementById('subtitle').textContent = "不論什麼時候，這裡都有一雙耳朵願意聽你說話";
       document.getElementById('tagline').textContent = "什麼都可以聊，不說教，只傾聽";
-      document.getElementById('pricingLabel').textContent = "收費方案";
       document.getElementById('bookTitle').textContent = "預約時段";
-      document.getElementById('bookHint').textContent = "全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。";
+      document.getElementById('bookHint').innerHTML = "全時段皆可預約；支援語音或打字。表單送出後資料將儲存在 Google 表單/試算表。<br>🌸 近期將推出「甜心陪聊優惠活動」，預約前可留言「我要優惠」優先獲得名額 💗";
       document.getElementById('faq1q').textContent = "都可以聊什麼？";
       document.getElementById('faq1a').textContent = "日常、情緒、壓力、興趣、助眠等。涉政涉黃/醫療診斷恕不提供。";
       document.getElementById('faq2q').textContent = "如何預約？";
       document.getElementById('faq2a').textContent = "點擊上方按鈕或填表單，留下聯絡方式與時間。";
       document.getElementById('faq3q').textContent = "能否打字聊天？";
-      document.getElementById('faq3a').textContent = "可以，收費同半小時方案。";
+      document.getElementById('faq3a').textContent = "可以，收費方案可諮詢客服。";
       document.getElementById('introTitle').textContent = "關於 甜心樹洞陪聊";
     }
-    updatePrice(); renderOpeners(); renderTerms(); updateToggleUI();
     document.getElementById('introText').textContent = intros[state.locale];
-  }
-
-  // 價格＋原價（兩倍）
-  function updatePrice() {
-    const isCNY = state.currency === 'CNY';
-    const halfNew = isCNY ? '¥60' : 'NT$300';
-    const hourNew = isCNY ? '¥100' : 'NT$500';
-    const halfOld = isCNY ? '¥120' : 'NT$600';
-    const hourOld = isCNY ? '¥200' : 'NT$1000';
-    document.getElementById('priceHalf').textContent = halfNew;
-    document.getElementById('priceHour').textContent = hourNew;
-    document.getElementById('oldHalf').textContent = halfOld;
-    document.getElementById('oldHour').textContent = hourOld;
-    document.getElementById('halfLabel').textContent = state.locale==='zh' ? '/半小时' : '/半小時';
-    document.getElementById('hourLabel').textContent = state.locale==='zh' ? '/一小时' : '/一小時';
+    renderOpeners();
+    renderTerms();
+    renderPricing();
+    updateToggleUI();
   }
 
   function updateToggleUI() {
@@ -324,7 +400,7 @@
 
   // WeChat 複製
   function copyWeChat() {
-    navigator.clipboard.writeText('ddcapr').then(() => { alert('已複製 WeChat ID：ddcapr'); });
+    navigator.clipboard.writeText('ddcapr').then(() => { alert((state.locale==='zh'?'已复制 WeChat ID：':'已複製 WeChat ID：') + 'ddcapr'); });
   }
   document.getElementById('copyWeChat').addEventListener('click', copyWeChat);
   document.getElementById('btn-wechat').addEventListener('click', copyWeChat);

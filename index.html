@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<!-- Google tag (gtag.js) event - delayed navigation helper -->
+<script>
+  // Helper function to delay opening a URL until a gtag event is sent.
+  // Call it in response to an action that should navigate to a URL.
+  function gtagSendEvent(url) {
+    var callback = function () {
+      if (typeof url === 'string') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'ads_conversion___1', {
+      'event_callback': callback,
+      'event_timeout': 2000,
+      // <event_parameters>
+    });
+    return false;
+  }
+</script>
+
+<!-- Google tag (gtag.js) event -->
+<script>
+  gtag('event', 'ads_conversion___1', {
+    // <event_parameters>
+  });
+</script>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17636844065"></script>
 <script>
@@ -290,7 +316,7 @@
         "🌷 溫柔陪伴（8 小時）NT$1,500 — 穩定情緒支持，深夜可預約",
         "💞 心靈療癒（12 小時）NT$2,000 — 專屬時間優先保留＋一對一關懷"
       ],
-      experience: "✨ 初次預約優惠價：NT$50 / 30分鐘"
+      experience: "✨ 初次預約優惠價：NT$50 / 10分鐘"
     },
     zh: {
       rows: [
@@ -304,7 +330,7 @@
         "🌷 温柔陪伴（8 小时）¥300 — 稳定情绪支持，夜晚可预约",
         "💞 心灵疗愈（12 小时）¥400 — 专属时段优先保留＋一对一关怀"
       ],
-      experience: "✨ 首次体验价：¥15 / 30分钟"
+      experience: "✨ 首次体验价：¥15 / 10分钟"
     }
   };
 

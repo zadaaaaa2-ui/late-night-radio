@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>台股追蹤看板（到價推播版）</title>
+  <meta name="description" content="台股追蹤看板：可自訂追蹤、TradingView 圖卡、TWSE 實時報價輪詢、到價瀏覽器通知（推播）。" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .card { background: rgba(255,255,255,.65); backdrop-filter: blur(6px); }
+    .dark .card { background: rgba(24,24,27,.6); }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-gray-50">
+  <div class="max-w-6xl mx-auto px-4 py-6">
+    <header class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl md:text-3xl font-bold tracking-tight">台股追蹤看板 <span class="text-sm opacity-60">(到價推播版)</span></h1>
+      <div class="flex items-center gap-3">
+        <button id="themeBtn" class="px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800">深/淺色</button>
+        <a href="https://www.tradingview.com/widget-docs/widgets/mini-symbol-overview/" target="_blank" class="text-xs opacity-70 hover:opacity-100 underline">TradingView 小工具</a>
+      </div>
+    </header>
+
+    <section class="space-y-3 mb-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div class="flex gap-2 w-full md:w-auto">
+          <input id="inputSymbol" class="flex-1 md:w-80 px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 outline-none focus:ring-2 focus:ring-pink-300" placeholder="輸入：2330 / 2330.TW / 6488.TWO / TWSE:2330">
+          <button id="addBtn" class="px-3 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600 active:scale-95">新增</button>
+        </div>
+        <div class="flex gap-2">
+          <button id="exportBtn" class="px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800">匯出清單</button>
+          <label class="px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer">匯入清單
+            <input id="importInput" type="file" accept="application/json" class="hidden">
+          </label>
+          <button id="clearBtn" class="px-3 py-2 rounded-xl border border-red-300 text-red-600 hover:bg-red-50">清空</button>
+          <button id="notifBtn" class="px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800">啟用通知</button>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        追蹤格式：<code class="px-1">2330</code> 或 <code class="px-1">2330.TW</code>（上市 TWSE）/ <code class="px-1">6488.TWO</code>（上櫃 TPEX）。
+        報價來源：<strong>TWSE MIS API</strong>（上市、部分上櫃）；圖表來源：TradingView。
+      </p>
+    </section>
+
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+    <footer class="mt-12 text-xs opacity-70 leading-relaxed">
+      免責聲明：本頁僅供資訊顯示與自我管理追蹤，不構成投資建議；投資有風險，入市需謹慎。<br/>
+      版本：2025-10-27T01:36:40.396039。
+    </footer>
+  </div>
+
+  <script>
+  function normalizeToTVSymbol(input) {{
+    if (!input) return "";
+    const raw = input.trim().toUpperCase();
+    if (raw.startsWith("TWSE:") || raw.startsWith("TPEX:")) return raw;
+    if (/^\d+\.TWO$/.test(raw)) return `TPEX:${{raw.replace(".TWO","")}}`;
+    if (/^\d+\.TW$/.test(raw))  return `TWSE:${{raw.replace(".TW","")}}`;
+    if (/^\d+$/.test(raw))      return `TWSE:${{raw}}`;
+    return raw;
+  }}
+  function tvToTwseChannel(symbol) {{
+    const [ex, code] = symbol.split(":");
+    if (!ex || !code) return null;
+    if (/^\d+$/.test(code) === false) return null;
+    if (ex === "TWSE") return `tse_${{code}}.tw`;
+    if (ex === "TPEX") return `otc_${{code}}.tw`;
+    return null;
+  }}
+
+  const LS_KEYS = {{
+    WATCHLIST: "tw_watchlist",
+    THEME: "tw_theme",
+    ALERTS: "tw_alerts",
+  }};
+  const DEFAULTS = ["TWSE:2330", "TWSE:2317", "TWSE:0050", "TWSE:2603", "TWSE:2882"];
+
+  const state = {{
+    symbols: [],
+    theme: "light",
+    alerts: {{}}, // {{ [symbol]: {{ upper, lower, lastNotified }} }}
+    lastQuotes: {{} },
+    polling: null,
+  }};
+
+  const grid = document.getElementById("grid");
+  const addBtn = document.getElementById("addBtn");
+  const inputSymbol = document.getElementById("inputSymbol");
+  const exportBtn = document.getElementById("exportBtn");
+  const importInput = document.getElementById("importInput");
+  const clearBtn = document.getElementById("clearBtn");
+  const themeBtn = document.getElementById("themeBtn");
+  const notifBtn = document.getElementById("notifBtn");
+
+  (function init() {{
+    try {{ state.symbols = JSON.parse(localStorage.getItem(LS_KEYS.WATCHLIST)) || DEFAULTS; }} catch {{ state.symbols = DEFAULTS; }}
+    try {{ state.theme = JSON.parse(localStorage.getItem(LS_KEYS.THEME)) || "light"; }} catch {{ state.theme = "light"; }}
+    try {{ state.alerts = JSON.parse(localStorage.getItem(LS_KEYS.ALERTS)) || {{}}; }} catch {{ state.alerts = {{}}; }}
+    document.documentElement.classList.toggle("dark", state.theme === "dark");
+    renderAll();
+    startPolling();
+    if ("serviceWorker" in navigator) {{ navigator.serviceWorker.register("./sw.js").catch(()=>{{}}); }}
+  }})();
+
+  function saveAll() {{
+    localStorage.setItem(LS_KEYS.WATCHLIST, JSON.stringify(state.symbols));
+    localStorage.setItem(LS_KEYS.THEME, JSON.stringify(state.theme));
+    localStorage.setItem(LS_KEYS.ALERTS, JSON.stringify(state.alerts));
+  }}
+
+  addBtn.addEventListener("click", () => {{
+    const n = normalizeToTVSymbol(inputSymbol.value);
+    if (!n) return;
+    if (!state.symbols.includes(n)) {{
+      state.symbols = [n, ...state.symbols];
+      saveAll(); renderAll();
+    }}
+    inputSymbol.value = "";
+  }});
+  inputSymbol.addEventListener("keydown", (e) => {{ if (e.key === "Enter") addBtn.click(); }});
+  exportBtn.addEventListener("click", () => {{
+    const blob = new Blob([JSON.stringify(state.symbols, null, 2)], {{type: "application/json"}});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "watchlist.json"; a.click();
+    URL.revokeObjectURL(url);
+  }});
+  importInput.addEventListener("change", (e) => {{
+    const f = e.target.files?.[0]; if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => {{
+      try {{
+        const arr = JSON.parse(reader.result);
+        if (Array.isArray(arr)) {{
+          const next = arr.map(normalizeToTVSymbol).filter(Boolean);
+          state.symbols = Array.from(new Set(next));
+          saveAll(); renderAll();
+        }}
+      }} catch {{ }}
+    }};
+    reader.readAsText(f, "utf-8");
+  }});
+  clearBtn.addEventListener("click", () => {{ state.symbols = []; saveAll(); renderAll(); }});
+  themeBtn.addEventListener("click", () => {{
+    state.theme = state.theme === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", state.theme === "dark");
+    saveAll(); renderAll();
+  }});
+  notifBtn.addEventListener("click", async () => {{
+    if (!("Notification" in window)) return alert("此瀏覽器不支援通知");
+    const perm = await Notification.requestPermission();
+    if (perm !== "granted") alert("未授權通知，將無法顯示推播");
+  }});
+
+  function renderAll() {{
+    grid.innerHTML = "";
+    if (state.symbols.length === 0) {{
+      const empty = document.createElement("div");
+      empty.className = "mt-10 flex flex-col items-center gap-3 text-center opacity-80";
+      empty.innerHTML = `<div class="text-6xl">📈</div>
+                         <div class="text-lg">尚未加入任何標的</div>
+                         <div class="text-sm">從上方輸入框加入，如：2330、2317、0050…</div>`;
+      grid.appendChild(empty);
+      return;
+    }}
+    state.symbols.forEach(sym => grid.appendChild(makeCard(sym)));
+  }}
+
+  function makeCard(symbol) {{
+    const wrapper = document.createElement("div");
+    wrapper.className = "group relative";
+    const symId = symbol.replace(":","-");
+    const alerts = state.alerts[symbol] || {{ upper: "", lower: "", lastNotified: null }};
+
+    wrapper.innerHTML = `
+      <div class="absolute right-2 top-2 z-10 opacity-0 group-hover:opacity-100 transition flex gap-2">
+        <button data-remove class="px-2 py-1 text-xs rounded-lg bg-red-500 text-white hover:bg-red-600">移除</button>
+      </div>
+      <div class="mb-2 font-semibold">${{symbol}}</div>
+      <div id="tv-${{symId}}" class="card rounded-2xl border border-gray-200 dark:border-gray-700 p-3 shadow-sm">
+        <div class="h-56" data-tv></div>
+        <div class="mt-2 text-xs text-gray-500">來源：TradingView（${{symbol}}）</div>
+      </div>
+      <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+        <div class="card rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+          <div class="flex items-center justify-between">
+            <div class="opacity-70">現價</div>
+            <div class="font-mono" id="last-${{symId}}">-</div>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <div class="opacity-70">漲跌</div>
+            <div class="font-mono" id="chg-${{symId}}">-</div>
+          </div>
+        </div>
+        <div class="card rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+          <div class="opacity-70 mb-1">到價提醒</div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs opacity-70">高於</span>
+            <input data-upper class="flex-1 px-2 py-1 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent" placeholder="如 700" value="${{alerts.upper ?? ""}}">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs opacity-70">低於</span>
+            <input data-lower class="flex-1 px-2 py-1 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent" placeholder="如 550" value="${{alerts.lower ?? ""}}">
+          </div>
+        </div>
+      </div>
+      <div class="mt-2 text-xs flex gap-3 opacity-70">
+        <a target="_blank" class="underline hover:opacity-100" href="https://tw.tradingview.com/symbols/${{symbol.replace(':','-')}}/">TradingView</a>
+        <a target="_blank" class="underline hover:opacity-100" href="https://tw.stock.yahoo.com/quote/${{symbol.replace('TWSE:','').replace('TPEX:','')}}.TW">Yahoo</a>
+      </div>
+    `;
+
+    wrapper.querySelector("[data-remove]").addEventListener("click", () => {{
+      state.symbols = state.symbols.filter(s => s !== symbol);
+      saveAll(); renderAll();
+    }});
+    const upperInput = wrapper.querySelector("[data-upper]");
+    const lowerInput = wrapper.querySelector("[data-lower]");
+    const persistAlerts = () => {{
+      state.alerts[symbol] = {{
+        upper: upperInput.value ? Number(upperInput.value) : "",
+        lower: lowerInput.value ? Number(lowerInput.value) : "",
+        lastNotified: (state.alerts[symbol] && state.alerts[symbol].lastNotified) || null
+      }};
+      saveAll();
+    }};
+    upperInput.addEventListener("change", persistAlerts);
+    lowerInput.addEventListener("change", persistAlerts);
+
+    const tvContainer = wrapper.querySelector("[data-tv]");
+    const script = document.createElement("script");
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = JSON.stringify({{
+      symbol: symbol,
+      width: "100%",
+      height: "220",
+      locale: "zh_TW",
+      dateRange: "1D",
+      colorTheme: document.documentElement.classList.contains("dark") ? "dark" : "light",
+      trendLineColor: "rgba(41, 98, 255, 1)",
+      underLineColor: "rgba(41, 98, 255, 0.3)",
+      isTransparent: true
+    }});
+    tvContainer.innerHTML = "";
+    tvContainer.appendChild(script);
+
+    return wrapper;
+  }}
+
+  async function pollQuotes() {{
+    if (state.symbols.length === 0) return;
+    const channels = state.symbols.map(tvToTwseChannel).filter(Boolean);
+    if (channels.length === 0) return;
+    const url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=" + encodeURIComponent(channels.join("|"));
+    try {{
+      const res = await fetch(url, {{ cache: "no-store" }});
+      const data = await res.json();
+      if (!data || !data.msgArray) return;
+      data.msgArray.forEach(item => {{
+        const code = item.c;
+        const ex = (item.ex === "tse" || item.ex === "TSE") ? "TWSE" : "TPEX";
+        const symbol = `${{ex}}:${{code}}`;
+        const price = Number(item.z || item.a || item.b || 0);
+        const y = Number(item.y || 0);
+        const chg = (price && y) ? (price - y) : 0;
+        const chgPct = (price && y) ? (chg / y * 100) : 0;
+
+        state.lastQuotes[symbol] = {{ price, y, chg, chgPct, time: item.tlong || item.t }};
+
+        const symId = symbol.replace(":","-");
+        const lastEl = document.getElementById("last-" + symId);
+        const chgEl  = document.getElementById("chg-" + symId);
+        if (lastEl) lastEl.textContent = price ? price.toFixed(price >= 100 ? 1 : 2) : "-";
+        if (chgEl)  chgEl.innerHTML = (function(){{
+          const sign = chg >= 0 ? "+" : "";
+          const color = chg >= 0 ? "text-green-600" : "text-red-600";
+          return `<span class="${{color}}">${{sign}}${{chg.toFixed(2)}} (${{sign}}${{chgPct.toFixed(2)}}%)</span>`;
+        }})();
+
+        checkAlerts(symbol, price);
+      }});
+    }} catch (e) {{ }}
+  }}
+  function startPolling() {{ if (state.polling) clearInterval(state.polling); pollQuotes(); state.polling = setInterval(pollQuotes, 8000); }}
+
+  function canNotify() {{ return "Notification" in window && Notification.permission === "granted"; }}
+  function sendNotify(title, body) {{
+    if (canNotify()) {{
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {{
+        navigator.serviceWorker.controller.postMessage({{ type: "notify", title, body }});
+      }} else {{
+        new Notification(title, {{ body }});
+      }}
+    }}
+  }}
+  function checkAlerts(symbol, price) {{
+    const a = state.alerts[symbol];
+    if (!a || !price) return;
+    const upper = a.upper === "" ? null : Number(a.upper);
+    const lower = a.lower === "" ? null : Number(a.lower);
+    const last = a.lastNotified || null;
+
+    if (upper != null && price >= upper) {{
+      if (!last || last.dir !== "up" || Math.abs(price - last.price) > 0.01) {{
+        sendNotify(`到價↑ ${{symbol}}`, `現價 ${{price}} 已高於 ${{upper}}`);
+        a.lastNotified = {{ dir: "up", price }};
+        saveAll();
+      }}
+    }} else if (lower != null && price <= lower) {{
+      if (!last || last.dir !== "down" || Math.abs(price - last.price) > 0.01) {{
+        sendNotify(`到價↓ ${{symbol}}`, `現價 ${{price}} 已低於 ${{lower}}`);
+        a.lastNotified = {{ dir: "down", price }};
+        saveAll();
+      }}
+    }} else {{ }}
+  }}
+  </script>
+</body>
+</html>
